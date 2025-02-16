@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HeartScript</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+DE+Grund:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+DE+Grund:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+    .logo {
+        padding: 0;
+        align-items: center;
+        display: flex;
+
+    }
+    .logo img {
+        display: block;
+        height: auto;
+        max-width: 50%;
+    }
+    @media(max-width:500px) {
+        .logo {
+            width: 100px;
+        }
+    }
+    .header {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: lightpink;
+        position: sticky;
+        top: 0;
+        z-index: 5;
+    }
+    .header-left a{
+        text-decoration: none;
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-style: normal;
+        font-size: 20px;
+        color: saddlebrown;
+    }
+    .header-right{
+        flex: 1;
+        text-align: right;
+    }
+
+    .header-right nav ul li {
+        padding: 20px;
+        display: inline;
+        margin-left: 15px;
+        font-size: 19px;
+        font-style: initial;
+        font-weight: bold;
+    }
+
+    .header-right nav li a{
+        font-family: 'Poppins', sans-serif;
+        text-decoration: none;
+        color: saddlebrown;
+
+    }
+    .header-right nav li a:hover{
+        text-decoration: black;
+    }
+
+    .video-container {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .video-container video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 100%;
+        min-height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
+
+    .video-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+    }
+
+    .center-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        height: 200px;
+        padding: 20px;
+        background-color: #ffc5cf;
+        opacity:70%;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        z-index: 2;
+    }
+
+    .center-box button {
+        display: inline-block;
+        width: 100px;
+        padding: 10px;
+        margin: 10px 5px;
+        margin-top: 20px;
+        margin-left: 10px;
+        font-size: 15px;
+        color : white;
+        background-color: saddlebrown;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.5s ease, transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    .center-box button:hover {
+        background-color: #cf709a;
+    }
+
+    .center-box button:active {
+        background-color: #cf709a;
+    }
+
+
+    @media (max-width: 500px) {
+        .center-box {
+            width: 90%;
+            padding: 15px;
+        }
+
+        .center-box h2 {
+            font-size: 20px;
+        }
+
+        .center-box button {
+            width: 100px;
+            font-size: 14px;
+        }
+    }
+
+    .about-section {
+        background: linear-gradient(to bottom, #ffc5cf, #a87e5d);
+        padding: 50px 20px;
+        text-align: center;
+        color: #4d2b1f;
+        font-family: Playfair Display, serif;
+        font-weight: 500;
+    }
+    .about-header {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: #4d2b1f;
+        font-weight: 700;
+    }
+    .about-text {
+        font-size: 1.2rem;
+        margin: 0 auto 40px;
+        max-width: 600px;
+        line-height: 1.6;
+        color: #663d32;
+    }
+    .about-cards {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        background-color: #f6cad4;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 250px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-15px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #4d2b1f;
+    }
+
+    .card p {
+        font-size: 1rem;
+        color: #663d32;
+    }
+
+    @media (max-width: 768px) {
+        .about-cards {
+            flex-direction: column;
+            align-items: center;
+        }
+        .card {
+            width: 90%;
+            margin-bottom: 20px;
+        }
+        .about-header {
+            font-size: 2.5rem;
+        }
+        .about-text {
+            font-size: 1.2rem;
+        }
+    }
+    .contact-section {
+        background-color: #e8cfc1;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .contact-section h2 {
+        font-size: 2rem;
+        color: #4d302f;
+        margin-bottom: 40px;
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .social-links a {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: #f4ddd4;
+        color: #4d302f;
+        font-size: 1.5rem;
+        line-height: 60px;
+        text-align: center;
+        text-decoration: none;
+        transition: transform 0.3s, background-color 0.3s;
+    }
+
+    .social-links a:hover {
+        background-color: #c09589;
+        transform: scale(1.1);
+    }
+
+    .social-links i {
+        vertical-align: middle;
+    }
+
+    footer {
+        margin-top: 20px;
+        color: #4d302f;
+        font-size: 0.9rem;
+    }
+</style>
+<body>
+<header class="header">
+        <div class="logo">
+            <img src="https://cdn-icons-png.flaticon.com/128/17705/17705284.png" title="HeartScript Logo" alt="Logo">
+        </div>
+        <div class="header-left">
+            <a href="landing_page.html">
+                <h2>HeartScript</h2>
+            </a>
+        </div>
+        <div class="header-right">
+            <nav>
+                <ul>
+                    <li><a href="#home-section">Home</a></li>
+                    <li><a href="#about-section">About</a></li>
+                    <li><a href="#contact-section">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+</header>
+<main>
+    <section id="home-section" class="home-section">
+        <div class="video-container">
+            <video autoplay muted loop>
+                <source src="https://videos.pexels.com/video-files/15462800/15462800-uhd_2560_1440_30fps.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay"></div>
+            <div class="center-box">
+                <h2>Welcome to HeartScript, your personal journaling space.</h2>
+                <button id="signUpButton">Sign Up</button>
+                <button id="signInButton">Sign In</button>
+            </div>
+        </div>
+    </section>
+    <section id="about-section" class="about-section">
+        <div class="about-container">
+            <h2 class="about-header">About HeartScript</h2>
+            <p>"Welcome to HeartScript, your personal space to pour your heart out! Whether it's your wildest
+                ideas, everyday thoughts, or heartfelt emotions, HeartScript is here to make journaling easy and
+                enjoyable. Capture memories, reflect on your journey, and discover the joy of self-expression. Let’s
+                make your story beautifully yours!"</p>
+            <div class="about-cards">
+                <div class="card">
+                    <h3>Personalized</h3>
+                    <p class="about-text">
+                        "HeartScript offers a tailored journaling experience that beautifully adapts to your mood and style.
+                        Whether you’re feeling reflective, creative, or just need a space to unwind, HeartScript is here to
+                        make every entry uniquely yours. Your journal, your rules, your vibe!"</p>
+                </div>
+                <div class="card">
+                    <h3>Secure</h3>
+                    <p>"Your thoughts are safe with us, securely stored with the highest privacy standards. At HeartScript,
+                        your personal space is protected, ensuring you can journal freely and confidently, knowing your
+                        reflections are yours alone."</p>
+                </div>
+                <div class="card">
+                    <h3>Creative</h3>
+                    <p>"Unleash your creativity with HeartScript! Add multimedia entries, organize your thoughts with
+                        categories, and explore endless ways to make your journal uniquely yours. Let your imagination run
+                        free!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact-section" class="contact-section">
+        <div class="contact-container">
+            <h2 class="contact-header">Contact HeartScript</h2>
+        </div>
+        <div class="social-links">
+            <a href="https://www.instagram.com/soumyasnehal_05/" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://github.com/neonmeta07" target="_blank" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/soumya-snehal-899a23281/" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </div>
+        <footer>
+            &copy; 2024 Soumya Snehal. All rights reserved.
+        </footer>
+    </section>
+</main>
+
+<script>
+    document.querySelector('#signUpButton').addEventListener('click', function() {
+        const button = this;
+
+        button.style.opacity = '0';
+        button.style.transform = 'scale(0.9)';
+
+        setTimeout(function() {
+            window.location.href = 'signup.html';
+        }, 300);
+    });
+</script>
+
+<script>
+    document.querySelector('#signInButton').addEventListener('click', function() {
+        const button = this;
+
+        button.style.opacity = '0';
+        button.style.transform = 'scale(0.9)';
+
+        setTimeout(function() {
+            window.location.href = 'signin.html';
+        }, 300);
+    });
+</script>
+<script>
+    document.querySelector('a[href="#home-section"]').addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        const offset = target.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+            top: offset,
+            behavior:"smooth"
+        });
+    });
+</script>
+<script>
+    document.querySelector('a[href="#about-section"]').addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        const offset = target.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+            top: offset,
+            behavior:"smooth"
+        });
+    });
+</script>
+<script>
+    document.querySelector('a[href="#contact-section"]').addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        const offset = target.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+            top: offset,
+            behavior:"smooth"
+        });
+    });
+</script>
+</body>
+</html>

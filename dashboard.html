@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Your Journey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+
+            background-image: linear-gradient(135deg, #c09589 0%, #c6789a 20%, #9e6d5f 50%, rgba(182, 118, 118, 0.5) 100%);
+            height: auto;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+
+        .logo {
+            padding: 0;
+            align-items: center;
+            display: flex;
+
+        }
+        .logo img {
+            display: block;
+            height: auto;
+            max-width: 50%;
+        }
+        @media(max-width:500px) {
+            .logo {
+                width: 100px;
+            }
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: lightpink;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 0;
+            margin: 0;
+        }
+        .header-left a{
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-style: normal;
+            font-size: 20px;
+            color: saddlebrown;
+        }
+        .header-right{
+            flex: 1;
+            text-align: right;
+        }
+
+        .header-right nav ul li {
+            padding: 20px;
+            display: inline;
+            margin-left: 15px;
+            font-size: 19px;
+            font-style: initial;
+            font-weight: bold;
+        }
+
+        .header-right nav li a{
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            color: saddlebrown;
+
+        }
+        .header-right nav li a:hover{
+            text-decoration: black;
+        }
+
+        .main-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 40px;
+        }
+        header {
+            background-image: linear-gradient(135deg, rgba(232, 171, 201, 0.9) , #b68277);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 3;
+            border-radius: 40px;
+            width: 50%;
+            justify-content: center;
+            margin: auto;
+            margin-top: 10px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            color: #4d302f;
+            letter-spacing: 1px;
+        }
+
+        .container{
+            position: relative;
+            object-fit: cover;
+            margin: auto;
+            margin-bottom: 50px;
+            max-width: 1000px;
+            width: 95%;
+            min-height: 550px;
+            height: auto;
+            background: #f5f5f5;
+            box-shadow: 0 30px 50px #dbdbdb;
+            z-index: 2;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .container .slide .item{
+            width: 200px;
+            height: 300px;
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+            border-radius: 20px;
+            box-shadow: 0 30px 50px #505050;
+            background-position: 50% 50%;
+            background-size: cover;
+            display: inline-block;
+            transition: 0.5s;
+        }
+
+        .slide .item:nth-child(1),
+        .slide .item:nth-child(2){
+            top: 0;
+            left: 0;
+            transform: translate(0, 0);
+            border-radius: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+
+        .slide .item:nth-child(3){
+            left: 50%;
+        }
+        .slide .item:nth-child(4){
+            left: calc(50% + 220px);
+        }
+        .slide .item:nth-child(5){
+            left: calc(50% + 440px);
+        }
+
+        /* here n = 0, 1, 2, 3,... */
+        .slide .item:nth-child(n + 6){
+            left: calc(50% + 660px);
+            opacity: 0;
+        }
+
+        .item .content{
+            position: absolute;
+            top: 50%;
+            left: 100px;
+            width: 300px;
+            text-align: left;
+            color: #eee;
+            transform: translate(0, -50%);
+            font-family: system-ui;
+            display: none;
+        }
+
+        .slide .item:nth-child(2) .content{
+            display: block;
+        }
+
+        .content .name{
+            font-size: 40px;
+            text-transform: uppercase;
+            font-weight: bold;
+            opacity: 0;
+            animation: animate 1s ease-in-out 1 forwards;
+        }
+
+        .content .des{
+            margin-top: 10px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: animate 1s ease-in-out 0.3s 1 forwards;
+        }
+
+        .content button{
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            animation: animate 1s ease-in-out 0.6s 1 forwards;
+        }
+
+
+        @keyframes animate {
+        from{
+            opacity: 0;
+            transform: translate(0, 100px);
+            filter: blur(33px);
+        }
+
+        to{
+            opacity: 1;
+            transform: translate(0);
+            filter: blur(0);
+        }
+        }
+
+        .see-more {
+            border: none;
+            border-radius: 20px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .see-more:hover{
+            background-color: #b68277;
+            transform: scale(1.2);
+        }
+
+        .button{
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            bottom: 20px;
+        }
+
+        .button button{
+            width: 40px;
+            height: 35px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            margin: 0 5px;
+            border: 1px solid #000;
+            transition: 0.3s;
+        }
+
+        .button button:hover{
+            background: #ababab;
+            color: #fff;
+        }
+
+        .quote-section {
+            width: 70%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px;
+            background: linear-gradient(to bottom, rgba(247, 217, 225, 0.9), rgba(217, 167, 199, 0.9));
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
+        }
+
+        .quote-section .heading {
+            flex: 1;
+            text-align: left;
+            padding-right: 20px;
+        }
+
+        .quote-section .heading h2 {
+            font-size: 2.5rem;
+            font-family: 'Georgia', serif;
+            color: #a55c82;
+            line-height: 1.4;
+        }
+
+        .quote-section .quotes-box {
+            flex: 1;
+            background: linear-gradient(135deg, #E8B4B4, #9E6D5F);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .quote-section .quotes-box p {
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            color: #333;
+            line-height: 1.6;
+            font-style: normal;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .quote-section .quotes-box p.fade-out {
+            opacity: 0;
+        }
+</style>
+<body>
+<header class="header">
+    <div class="logo">
+        <img src="https://cdn-icons-png.flaticon.com/128/17705/17705284.png" title="HeartScript Logo" alt="Logo">
+    </div>
+    <div class="header-left">
+        <a href="dashboard.html">
+            <h2>HeartScript</h2>
+        </a>
+    </div>
+    <div class="header-right">
+        <nav>
+            <ul>
+                <li><a href="#main-wrapper">Home</a></li>
+                <li><a href="#quote-section">Quotes</a></li>
+                <li><a href="#contact-section">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div  id="main-wrapper" class="animated-background"></div>
+<header>
+    <h1>Welcome to Your Dashboard!</h1>
+</header>
+
+<div class="main-wrapper">
+    <div class="container">
+
+        <div class="slide">
+
+            <div class="item" style="background-image: url(https://images.pexels.com/photos/5717407/pexels-photo-5717407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);">
+                <div class="content">
+                    <div class="name">Notes</div>
+                    <div class="des">"Jot down quick thoughts, ideas, or reminders with personal short notes—your space for all the little things that matter!"</div>
+                    <button id="see-more4" class="see-more">See More</button>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(https://images.pexels.com/photos/5717458/pexels-photo-5717458.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);">
+                <div class="content">
+                    <div class="name">Your Journal</div>
+                    <div class="des">"Set your dreams in motion by jotting down your day to day life and watch them turn into achievements!"</div>
+                    <button id="see-more3" class="see-more">See More</button>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(https://images.pexels.com/photos/19797269/pexels-photo-19797269/free-photo-of-2024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);">
+                <div class="content">
+                    <div class="name">Weekly Planner</div>
+                    <div class="des">"Stay organized and on top of your game by crafting your weekly planner—plan, prioritize, and conquer your days!"</div>
+                    <button id="see-more2" class="see-more">See More</button>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(https://images.pexels.com/photos/5712505/pexels-photo-5712505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);">
+                <div class="content">
+                    <div class="name">To-Do List</div>
+                    <div class="des">"Keep track of your tasks with a personalized to-do list—stay focused, productive, and accomplish more each day!"</div>
+                    <button id="see-more1" class="see-more">See More</button>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(https://images.pexels.com/photos/1425099/pexels-photo-1425099.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);">
+                <div class="content">
+                    <div class="name">Calendar</div>
+                    <div class="des">"Stay ahead of your schedule with a built-in calendar—mark important dates, set reminders, and plan your time effortlessly!"</div>
+                    <button id="see-more" class="see-more">See More</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="button">
+            <button class="prev"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="next"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+    </div>
+    <section id="quote-section" class="quote-section">
+        <div class="heading">
+            <h2>Few quotes to cheer you up!</h2>
+        </div>
+        <div class="quotes-box">
+            <p id="quoteText">Mistakes are proof you're trying—celebrate the effort, not just the result!</p>
+        </div>
+    </section>
+
+</div>
+<script>
+    let next = document.querySelector('.next')
+    let prev = document.querySelector('.prev')
+
+    next.addEventListener('click', function(){
+        let items = document.querySelectorAll('.item')
+        document.querySelector('.slide').appendChild(items[0])
+    })
+
+    prev.addEventListener('click', function(){
+        let items = document.querySelectorAll('.item')
+        document.querySelector('.slide').prepend(items[items.length - 1]) // here the length of items = 6
+    })
+</script>
+<script>
+    let next = document.querySelector('.next')
+    let prev = document.querySelector('.prev')
+
+    next.addEventListener('click', function(){
+        let items = document.querySelectorAll('.item')
+        document.querySelector('.slide').appendChild(items[0])
+    })
+
+    prev.addEventListener('click', function(){
+        let items = document.querySelectorAll('.item')
+        document.querySelector('.slide').prepend(items[items.length - 1]) // here the length of items = 6
+    })
+</script>
+<script>
+    let next = document.querySelector('.next')
+    let prev = document.querySelector('.prev')
+
+    next.addEventListener('click', function(){
+        let items = document.querySelectorAll('.item')
+        document.querySelector('.slide').appendChild(items[0])
+    })
+
+    prev.addEventListener('click', function(){
+        let items = document.querySelectorAll('.item')
+        document.querySelector('.slide').prepend(items[items.length - 1])
+    })
+</script>
+
+<script>
+    const quotes = [
+        "Every storm runs out of rain—hang in there, brighter days are ahead!",
+        "You're stronger than you think and braver than you feel—keep going!",
+        "Good luck today! I know you’ll do great.",
+        "You’ve made it through tough days before, and you’ll do it again—one step at a time!",
+        "Sending you good thoughts—and hoping you believe in yourself just as much as I believe in you.",
+        "Be good to yourself. And let others be good to you, too.",
+        "You are amazing for facing this with so much courage and hope.",
+        "You’re being so strong—and patient. Keep the faith. Things are going to start looking up soon."
+    ];
+
+    let currentIndex = 0;
+    const quoteText = document.getElementById("quoteText");
+
+    function changeQuote() {
+        quoteText.classList.add("fade-out");
+        setTimeout(() => {
+            currentIndex = (currentIndex + 1) % quotes.length;
+            quoteText.textContent = quotes[currentIndex];
+            quoteText.classList.remove("fade-out");
+            quoteText.classList.add("fade-in");
+        }, 500);
+    }
+
+    setInterval(changeQuote, 3000);
+</script>
+<script>
+    document.querySelector('a[href="#main-wrapper"]').addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        const offset = target.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+            top: offset,
+            behavior:"smooth"
+        });
+    });
+</script>
+<script>
+    document.querySelector('a[href="#quote-section"]').addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        const offset = target.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+            top: offset,
+            behavior:"smooth"
+        });
+    });
+</script>
+<script>
+    document.querySelector('#see-more').addEventListener('click', function() {
+        const button = this;
+
+        button.style.opacity = '0';
+        button.style.transform = 'scale(1.1)';
+
+        setTimeout(function() {
+            window.location.href = 'calendar.html';
+        }, 300);
+    });
+</script>
+</body>
+</html>
