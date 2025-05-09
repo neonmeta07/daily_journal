@@ -3,316 +3,712 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Start Your Journey</title>
+    <title>HeartScript Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Indie+Flower&family=Pacifico&family=Caveat&family=Sacramento&family=Quicksand&family=Comfortaa&family=Poppins&family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    /* Base Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        body{
+    body {
+        font-family: "Quicksand", sans-serif;
+        min-height: 100vh;
+        transition: background-color 0.3s ease;
+    }
 
-            background-image: linear-gradient(135deg, #c09589 0%, #c6789a 20%, #9e6d5f 50%, rgba(182, 118, 118, 0.5) 100%);
-            height: auto;
-            overflow-y: scroll;
-            scroll-behavior: smooth;
-        }
+    /* Theme Variables */
+    .theme-soft-pink {
+        --primary-bg: #fff5f7;
+        --secondary-bg: #fff;
+        --primary-color: #8b5a4c;
+        --secondary-color: #d6a3a3;
+        --accent-color: #f7caca;
+        --text-color: #5d4037;
+        --border-color: #e8c4c4;
+        --paper-texture: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23f7d6d6' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
 
-        .logo {
-            padding: 0;
-            align-items: center;
-            display: flex;
+    .theme-vintage-brown {
+        --primary-bg: #f5efe0;
+        --secondary-bg: #f9f3e6;
+        --primary-color: #8d6e63;
+        --secondary-color: #c48b9f;
+        --accent-color: #d7ccc8;
+        --text-color: #5d4037;
+        --border-color: #bcaaa4;
+        --paper-texture: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23bcaaa4' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
 
-        }
-        .logo img {
-            display: block;
-            height: auto;
-            max-width: 50%;
-        }
-        @media(max-width:500px) {
-            .logo {
-                width: 100px;
-            }
-        }
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px;
-            background-color: lightpink;
-            position: sticky;
-            top: 0;
-            z-index: 5;
-            width: 100%;
-            box-sizing: border-box;
-            border-radius: 0;
-            margin: 0;
-        }
-        .header-left a{
-            text-decoration: none;
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-style: normal;
-            font-size: 20px;
-            color: saddlebrown;
-        }
-        .header-right{
-            flex: 1;
-            text-align: right;
-        }
+    .theme-blush-gold {
+        --primary-bg: #fce4ec;
+        --secondary-bg: #fff9e6;
+        --primary-color: #c2985b;
+        --secondary-color: #f48fb1;
+        --accent-color: #ffe0b2;
+        --text-color: #8d6e63;
+        --border-color: #ffcc80;
+        --paper-texture: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffcc80' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
 
-        .header-right nav ul li {
-            padding: 20px;
-            display: inline;
-            margin-left: 15px;
-            font-size: 19px;
-            font-style: initial;
-            font-weight: bold;
-        }
+    .theme-dark-chocolate {
+        --primary-bg: #5d4037;
+        --secondary-bg: #795548;
+        --primary-color: #f8bbd0;
+        --secondary-color: #a1887f;
+        --accent-color: #d7ccc8;
+        --text-color: #f8bbd0;
+        --border-color: #8d6e63;
+        --paper-texture: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23a1887f' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
 
-        .header-right nav li a{
-            font-family: 'Poppins', sans-serif;
-            text-decoration: none;
-            color: saddlebrown;
+    .theme-pastel-rainbow {
+        --primary-bg: #f8e1f4;
+        --secondary-bg: #fff;
+        --primary-color: #b39ddb;
+        --secondary-color: #ffab91;
+        --accent-color: #b2ebf2;
+        --text-color: #7e57c2;
+        --border-color: #c5cae9;
+        --paper-texture: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23c5cae9' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
 
-        }
-        .header-right nav li a:hover{
-            text-decoration: black;
-        }
+    .theme-kawaii-pink {
+        --primary-bg: #ffcce6;
+        --secondary-bg: #fff0f7;
+        --primary-color: #ff66b3;
+        --secondary-color: #b3e0ff;
+        --accent-color: #ffe6f2;
+        --text-color: #cc0066;
+        --border-color: #ffb3d9;
+        --paper-texture: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffb3d9' fill-opacity='0.3' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
 
-        .main-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 40px;
-        }
-        header {
-            background-image: linear-gradient(135deg, rgba(232, 171, 201, 0.9) , #b68277);
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            z-index: 3;
-            border-radius: 40px;
-            width: 50%;
-            justify-content: center;
-            margin: auto;
-            margin-top: 10px;
-        }
+    body {
+        background-color: var(--primary-bg);
+        color: var(--text-color);
+        background-image: var(--paper-texture);
+    }
 
-        header h1 {
-            margin: 0;
-            font-size: 2.8rem;
-            color: #4d302f;
-            letter-spacing: 1px;
-        }
+    /* Header Styles */
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 20px;
+        background-color: var(--secondary-bg);
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
 
-        .container{
-            position: relative;
-            object-fit: cover;
-            margin: auto;
-            margin-bottom: 50px;
-            max-width: 1000px;
-            width: 95%;
-            min-height: 550px;
-            height: auto;
-            background: #f5f5f5;
-            box-shadow: 0 30px 50px #dbdbdb;
-            z-index: 2;
-            overflow: hidden;
-            border-radius: 20px;
-        }
+    .logo {
+        display: flex;
+        align-items: center;
+    }
 
-        .container .slide .item{
-            width: 200px;
-            height: 300px;
-            position: absolute;
-            top: 50%;
-            transform: translate(0, -50%);
-            border-radius: 20px;
-            box-shadow: 0 30px 50px #505050;
-            background-position: 50% 50%;
-            background-size: cover;
-            display: inline-block;
-            transition: 0.5s;
-        }
+    .logo img {
+        height: 40px;
+        width: auto;
+        margin-right: 10px;
+    }
 
-        .slide .item:nth-child(1),
-        .slide .item:nth-child(2){
-            top: 0;
-            left: 0;
-            transform: translate(0, 0);
-            border-radius: 0;
-            width: 100%;
-            height: 100%;
-        }
+    .header-left a {
+        text-decoration: none;
+        font-family: 'Dancing Script', cursive;
+        font-weight: 700;
+        font-size: 28px;
+        color: var(--primary-color);
+    }
 
+    .header-right {
+        flex: 1;
+        text-align: right;
+    }
 
-        .slide .item:nth-child(3){
-            left: 50%;
-        }
-        .slide .item:nth-child(4){
-            left: calc(50% + 220px);
-        }
-        .slide .item:nth-child(5){
-            left: calc(50% + 440px);
-        }
+    .header-right nav ul {
+        display: flex;
+        justify-content: flex-end;
+        list-style: none;
+    }
 
-        /* here n = 0, 1, 2, 3,... */
-        .slide .item:nth-child(n + 6){
-            left: calc(50% + 660px);
-            opacity: 0;
+    .header-right nav ul li {
+        margin-left: 20px;
+    }
+
+    .header-right nav li a {
+        font-family: 'Poppins', sans-serif;
+        text-decoration: none;
+        color: var(--primary-color);
+        font-weight: 500;
+        font-size: 16px;
+        transition: all 0.2s ease;
+    }
+
+    .header-right nav li a:hover {
+        color: var(--secondary-color);
+        transform: translateY(-2px);
+    }
+
+    /* Main Content */
+    .dashboard-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Welcome Header */
+    .welcome-header {
+        background-color: var(--secondary-bg);
+        padding: 25px;
+        text-align: center;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .welcome-header::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        width: 30px;
+        height: 30px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30' fill='none'%3E%3Cpath d='M5 5C5 2.79086 6.79086 1 9 1H25C27.2091 1 29 2.79086 29 5V21C29 23.2091 27.2091 25 25 25H9C6.79086 25 5 23.2091 5 21V5Z' stroke='%23d6a3a3' stroke-width='2'/%3E%3Cpath d='M15 5L5 15M20 5L5 20M25 5L5 25M29 10L10 29M29 15L15 29M29 20L20 29M29 25L25 29' stroke='%23d6a3a3' stroke-width='1'/%3E%3C/svg%3E");
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    .welcome-header::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        right: -5px;
+        width: 30px;
+        height: 30px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30' fill='none'%3E%3Cpath d='M25 25C27.2091 25 29 23.2091 29 21V5C29 2.79086 27.2091 1 25 1H9C6.79086 1 5 2.79086 5 5V21C5 23.2091 6.79086 25 9 25H25Z' stroke='%23d6a3a3' stroke-width='2'/%3E%3Cpath d='M15 25L25 15M10 25L25 10M5 25L25 5M1 20L20 1M1 15L15 1M1 10L10 1M1 5L5 1' stroke='%23d6a3a3' stroke-width='1'/%3E%3C/svg%3E");
+        transform: rotate(180deg);
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    .welcome-header h1 {
+        font-family: 'Dancing Script', cursive;
+        font-size: 42px;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        animation: glow 2s infinite alternate;
+    }
+
+    /* Add this to your CSS */
+    #welcome-message {
+        position: relative;
+        display: inline-block;
+    }
+
+    .welcome-emoji {
+        display: inline-block;
+        animation: bounce 0.5s ease infinite alternate;
+    }
+
+    @keyframes bounce {
+        from { transform: translateY(0); }
+        to { transform: translateY(-5px); }
+    }
+
+    .welcome-header h1 {
+        transition: all 0.3s ease;
+    }
+
+    .welcome-header h1:hover {
+        transform: scale(1.02);
+        text-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+    }
+    @keyframes glow {
+        0% {
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.3), 0 0 20px rgba(255, 105, 180, 0.3);
         }
-
-        .item .content{
-            position: absolute;
-            top: 50%;
-            left: 100px;
-            width: 300px;
-            text-align: left;
-            color: #eee;
-            transform: translate(0, -50%);
-            font-family: system-ui;
-            display: none;
+        100% {
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.5), 0 0 30px rgba(255, 105, 180, 0.5);
         }
+    }
 
-        .slide .item:nth-child(2) .content{
-            display: block;
-        }
+    /* Carousel/Slider */
+    .carousel-container {
+        background-color: var(--secondary-bg);
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 30px;
+        position: relative;
+        min-height: 450px;
+    }
 
-        .content .name{
-            font-size: 40px;
-            text-transform: uppercase;
-            font-weight: bold;
-            opacity: 0;
-            animation: animate 1s ease-in-out 1 forwards;
-        }
+    .carousel-container::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        width: 30px;
+        height: 30px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30' fill='none'%3E%3Cpath d='M5 5C5 2.79086 6.79086 1 9 1H25C27.2091 1 29 2.79086 29 5V21C29 23.2091 27.2091 25 25 25H9C6.79086 25 5 23.2091 5 21V5Z' stroke='%23d6a3a3' stroke-width='2'/%3E%3Cpath d='M15 5L5 15M20 5L5 20M25 5L5 25M29 10L10 29M29 15L15 29M29 20L20 29M29 25L25 29' stroke='%23d6a3a3' stroke-width='1'/%3E%3C/svg%3E");
+        opacity: 0.5;
+        pointer-events: none;
+    }
 
-        .content .des{
-            margin-top: 10px;
-            margin-bottom: 20px;
-            opacity: 0;
-            animation: animate 1s ease-in-out 0.3s 1 forwards;
-        }
+    .slide {
+        position: relative;
+        height: 400px;
+        overflow: hidden;
+    }
 
-        .content button{
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            opacity: 0;
-            animation: animate 1s ease-in-out 0.6s 1 forwards;
-        }
+    .item {
+        width: 200px;
+        height: 300px;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        background-position: 50% 50%;
+        background-size: cover;
+        display: inline-block;
+        transition: 0.5s;
+    }
 
+    .slide .item:nth-child(1),
+    .slide .item:nth-child(2) {
+        top: 0;
+        left: 0;
+        transform: translate(0, 0);
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+    }
 
-        @keyframes animate {
-        from{
+    .slide .item:nth-child(3) {
+        left: 50%;
+    }
+    .slide .item:nth-child(4) {
+        left: calc(50% + 220px);
+    }
+    .slide .item:nth-child(5) {
+        left: calc(50% + 440px);
+    }
+
+    .slide .item:nth-child(n + 6) {
+        left: calc(50% + 660px);
+        opacity: 0;
+    }
+
+    .item .content {
+        position: absolute;
+        top: 50%;
+        left: 100px;
+        width: 300px;
+        text-align: left;
+        color: #fff;
+        transform: translate(0, -50%);
+        font-family: system-ui;
+        display: none;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .slide .item:nth-child(2) .content {
+        display: block;
+    }
+
+    .content .name {
+        font-size: 40px;
+        text-transform: uppercase;
+        font-weight: bold;
+        opacity: 0;
+        animation: animate 1s ease-in-out 1 forwards;
+    }
+
+    .content .des {
+        margin-top: 10px;
+        margin-bottom: 20px;
+        opacity: 0;
+        animation: animate 1s ease-in-out 0.3s 1 forwards;
+    }
+
+    .content button {
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        opacity: 0;
+        animation: animate 1s ease-in-out 0.6s 1 forwards;
+    }
+
+    @keyframes animate {
+        from {
             opacity: 0;
             transform: translate(0, 100px);
             filter: blur(33px);
         }
-
-        to{
+        to {
             opacity: 1;
             transform: translate(0);
             filter: blur(0);
         }
+    }
+
+    .see-more {
+        background-color: var(--secondary-bg);
+        color: var(--primary-color);
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: transform 0.3s, background-color 0.3s;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .see-more:hover {
+        background-color: var(--accent-color);
+        transform: scale(1.1);
+    }
+
+    .button {
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        bottom: 20px;
+    }
+
+    .button button {
+        width: 40px;
+        height: 35px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        background-color: var(--secondary-bg);
+        color: var(--primary-color);
+        cursor: pointer;
+        margin: 0 5px;
+        transition: 0.3s;
+    }
+
+    .button button:hover {
+        background: var(--accent-color);
+        transform: translateY(-2px);
+    }
+
+    /* Quote Section */
+    .quote-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px;
+        background-color: var(--secondary-bg);
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .quote-section::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        width: 30px;
+        height: 30px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30' fill='none'%3E%3Cpath d='M5 5C5 2.79086 6.79086 1 9 1H25C27.2091 1 29 2.79086 29 5V21C29 23.2091 27.2091 25 25 25H9C6.79086 25 5 23.2091 5 21V5Z' stroke='%23d6a3a3' stroke-width='2'/%3E%3Cpath d='M15 5L5 15M20 5L5 20M25 5L5 25M29 10L10 29M29 15L15 29M29 20L20 29M29 25L25 29' stroke='%23d6a3a3' stroke-width='1'/%3E%3C/svg%3E");
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    .quote-section .heading {
+        flex: 1;
+        text-align: left;
+        padding-right: 20px;
+    }
+
+    .quote-section .heading h2 {
+        font-size: 32px;
+        font-family: 'Dancing Script', cursive;
+        color: var(--primary-color);
+        line-height: 1.4;
+    }
+
+    .quote-section .quotes-box {
+        flex: 1;
+        background-color: var(--accent-color);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+    }
+
+    .quote-section .quotes-box::before {
+        content: """;
+        position: absolute;
+        top: 0;
+        left: 10px;
+        font-size: 60px;
+        font-family: 'Georgia', serif;
+        color: var(--primary-color);
+        opacity: 0.2;
+    }
+
+    .quote-section .quotes-box::after {
+        content: """;
+        position: absolute;
+        bottom: -20px;
+        right: 10px;
+        font-size: 60px;
+        font-family: 'Georgia', serif;
+        color: var(--primary-color);
+        opacity: 0.2;
+    }
+
+    .quote-section .quotes-box p {
+        font-size: 20px;
+        font-family: 'Quicksand', sans-serif;
+        color: var(--text-color);
+        line-height: 1.6;
+        font-style: italic;
+        transition: opacity 0.8s ease-in-out;
+    }
+
+    .quote-section .quotes-box p.fade-out {
+        opacity: 0;
+    }
+
+    /* Theme Switcher */
+    .theme-switcher {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: var(--secondary-bg);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        z-index: 100;
+        transition: all 0.3s ease;
+    }
+
+    .theme-switcher:hover {
+        transform: scale(1.1);
+    }
+
+    .theme-icon {
+        font-size: 24px;
+        color: var(--primary-color);
+    }
+
+    /* Theme Menu */
+    .theme-menu {
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        background-color: var(--secondary-bg);
+        border-radius: 15px;
+        padding: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+        display: none;
+    }
+
+    .theme-menu.show {
+        display: block;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .theme-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .theme-option {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 5px;
+        transition: background-color 0.2s ease;
+    }
+
+    .theme-option:hover {
+        background-color: var(--accent-color);
+    }
+
+    .theme-option input {
+        display: none;
+    }
+
+    .theme-preview {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        margin-right: 10px;
+        border: 2px solid transparent;
+        position: relative;
+    }
+
+    .theme-option input:checked + .theme-preview {
+        border-color: var(--primary-color);
+    }
+
+    .theme-option input:checked + .theme-preview::after {
+        content: "✓";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 12px;
+        color: white;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .theme-preview.soft-pink {
+        background: linear-gradient(135deg, #fff5f7 50%, #d6a3a3 50%);
+    }
+
+    .theme-preview.vintage-brown {
+        background: linear-gradient(135deg, #f5efe0 50%, #c48b9f 50%);
+    }
+
+    .theme-preview.blush-gold {
+        background: linear-gradient(135deg, #fce4ec 50%, #c2985b 50%);
+    }
+
+    .theme-preview.dark-chocolate {
+        background: linear-gradient(135deg, #5d4037 50%, #f8bbd0 50%);
+    }
+
+    .theme-preview.pastel-rainbow {
+        background: linear-gradient(135deg, #f8e1f4 50%, #b2ebf2 50%);
+    }
+
+    .theme-preview.kawaii-pink {
+        background: linear-gradient(135deg, #ffcce6 50%, #ff66b3 50%);
+    }
+
+    .theme-name {
+        font-size: 14px;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .header {
+            flex-direction: column;
+            padding: 10px;
         }
 
-        .see-more {
-            border: none;
-            border-radius: 20px;
-            transition: transform 0.3s, background-color 0.3s;
+        .header-right nav ul {
+            justify-content: center;
+            margin-top: 10px;
         }
 
-        .see-more:hover{
-            background-color: #b68277;
-            transform: scale(1.2);
+        .header-right nav ul li {
+            margin: 0 10px;
         }
 
-        .button{
-            width: 100%;
-            text-align: center;
-            position: absolute;
-            bottom: 20px;
-        }
-
-        .button button{
-            width: 40px;
-            height: 35px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            margin: 0 5px;
-            border: 1px solid #000;
-            transition: 0.3s;
-        }
-
-        .button button:hover{
-            background: #ababab;
-            color: #fff;
+        .welcome-header h1 {
+            font-size: 32px;
         }
 
         .quote-section {
-            width: 70%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 50px;
-            background: linear-gradient(to bottom, rgba(247, 217, 225, 0.9), rgba(217, 167, 199, 0.9));
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            margin: 20px 0;
+            flex-direction: column;
         }
 
         .quote-section .heading {
-            flex: 1;
-            text-align: left;
-            padding-right: 20px;
-        }
-
-        .quote-section .heading h2 {
-            font-size: 2.5rem;
-            font-family: 'Georgia', serif;
-            color: #a55c82;
-            line-height: 1.4;
-        }
-
-        .quote-section .quotes-box {
-            flex: 1;
-            background: linear-gradient(135deg, #E8B4B4, #9E6D5F);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
             text-align: center;
+            margin-bottom: 20px;
+            padding-right: 0;
         }
 
-        .quote-section .quotes-box p {
-            font-size: 1.5rem;
-            font-family: 'Playfair Display', serif;
-            color: #333;
-            line-height: 1.6;
-            font-style: normal;
-            transition: opacity 0.8s ease-in-out;
+        .item .content {
+            left: 50px;
+            width: 250px;
         }
 
-        .quote-section .quotes-box p.fade-out {
-            opacity: 0;
+        .content .name {
+            font-size: 30px;
         }
+    }
+
+    /* SweetAlert Customization */
+    .swal2-popup {
+        border-radius: 20px !important;
+        font-family: 'Poppins', sans-serif !important;
+        background-color: var(--secondary-bg) !important;
+        color: var(--text-color) !important;
+    }
+
+    .swal2-title {
+        color: var(--primary-color) !important;
+    }
+
+    .swal2-confirm {
+        background-color: var(--primary-color) !important;
+        transition: all 0.3s !important;
+    }
+
+    .swal2-confirm:hover {
+        transform: scale(1.05) !important;
+        background-color: var(--secondary-color) !important;
+    }
+
+    .swal2-cancel {
+        background-color: #d33 !important;
+    }
+
+    /* Decorative Elements */
+    .decorative-element {
+        position: absolute;
+        font-size: 24px;
+        opacity: 0.3;
+        pointer-events: none;
+        z-index: 1;
+    }
 </style>
-<body>
+<body class="theme-soft-pink">
 <header class="header">
     <div class="logo">
-        <img src="https://cdn-icons-png.flaticon.com/128/17705/17705284.png" title="HeartScript Logo" alt="Logo">
+        <a href="landing_page.html">
+            <img src="https://cdn-icons-png.flaticon.com/128/17705/17705284.png" title="HeartScript Logo" alt="Logo">
+        </a>
     </div>
     <div class="header-left">
         <a href="dashboard.html">
@@ -322,23 +718,23 @@
     <div class="header-right">
         <nav>
             <ul>
-                <li><a href="#main-wrapper">Home</a></li>
+                <li><a href="#welcome-header">Home</a></li>
                 <li><a href="#quote-section">Quotes</a></li>
-                <li><a href="#contact-section">Contact</a></li>
+                <li><a href="#" id="logout-link">Logout</a></li>
             </ul>
         </nav>
     </div>
 </header>
-<div  id="main-wrapper" class="animated-background"></div>
-<header>
-    <h1>Welcome to Your Dashboard!</h1>
-</header>
 
-<div class="main-wrapper">
-    <div class="container">
+<div class="dashboard-container">
+    <div id="welcome-header" class="welcome-header">
+        <h1 id="welcome-message">Welcome to Your Dashboard!</h1>
+        <span class="decorative-element" style="top: 10px; right: 30px;">✨</span>
+        <span class="decorative-element" style="bottom: 10px; left: 30px;">🌸</span>
+    </div>
 
+    <div class="carousel-container">
         <div class="slide">
-
             <div class="item" style="background-image: url(https://images.pexels.com/photos/5717407/pexels-photo-5717407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);">
                 <div class="content">
                     <div class="name">Notes</div>
@@ -355,7 +751,7 @@
             </div>
             <div class="item" style="background-image: url(https://images.pexels.com/photos/19797269/pexels-photo-19797269/free-photo-of-2024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);">
                 <div class="content">
-                    <div class="name">Weekly Planner</div>
+                    <div class="name">Weekly Mood Graph</div>
                     <div class="des">"Stay organized and on top of your game by crafting your weekly planner—plan, prioritize, and conquer your days!"</div>
                     <button id="see-more2" class="see-more">See More</button>
                 </div>
@@ -374,15 +770,14 @@
                     <button id="see-more" class="see-more">See More</button>
                 </div>
             </div>
-
         </div>
 
         <div class="button">
             <button class="prev"><i class="fa-solid fa-arrow-left"></i></button>
             <button class="next"><i class="fa-solid fa-arrow-right"></i></button>
         </div>
-
     </div>
+
     <section id="quote-section" class="quote-section">
         <div class="heading">
             <h2>Few quotes to cheer you up!</h2>
@@ -391,110 +786,339 @@
             <p id="quoteText">Mistakes are proof you're trying—celebrate the effort, not just the result!</p>
         </div>
     </section>
-
 </div>
+
+<!-- Theme Switcher -->
+<div class="theme-switcher">
+    <span class="theme-icon">🎨</span>
+</div>
+
+<!-- Theme Menu -->
+<div class="theme-menu">
+    <div class="theme-options">
+        <label class="theme-option">
+            <input type="radio" name="theme" value="soft-pink" checked>
+            <span class="theme-preview soft-pink"></span>
+            <span class="theme-name">Soft Pink & Cream</span>
+        </label>
+        <label class="theme-option">
+            <input type="radio" name="theme" value="vintage-brown">
+            <span class="theme-preview vintage-brown"></span>
+            <span class="theme-name">Vintage Brown & Rose</span>
+        </label>
+        <label class="theme-option">
+            <input type="radio" name="theme" value="blush-gold">
+            <span class="theme-preview blush-gold"></span>
+            <span class="theme-name">Blush & Gold</span>
+        </label>
+        <label class="theme-option">
+            <input type="radio" name="theme" value="dark-chocolate">
+            <span class="theme-preview dark-chocolate"></span>
+            <span class="theme-name">Dark Chocolate & Pink</span>
+        </label>
+        <label class="theme-option">
+            <input type="radio" name="theme" value="pastel-rainbow">
+            <span class="theme-preview pastel-rainbow"></span>
+            <span class="theme-name">Pastel Rainbow</span>
+        </label>
+        <label class="theme-option">
+            <input type="radio" name="theme" value="kawaii-pink">
+            <span class="theme-preview kawaii-pink"></span>
+            <span class="theme-name">Kawaii Pink</span>
+        </label>
+    </div>
+</div>
+
 <script>
-    let next = document.querySelector('.next')
-    let prev = document.querySelector('.prev')
+    window.onpageshow = function(event) {
+        if (event.persisted) {
+            // Page was loaded from cache (like when using back button)
+            checkAuthStatus();
+        }
+    };
 
-    next.addEventListener('click', function(){
-        let items = document.querySelectorAll('.item')
-        document.querySelector('.slide').appendChild(items[0])
-    })
-
-    prev.addEventListener('click', function(){
-        let items = document.querySelectorAll('.item')
-        document.querySelector('.slide').prepend(items[items.length - 1]) // here the length of items = 6
-    })
-</script>
-<script>
-    let next = document.querySelector('.next')
-    let prev = document.querySelector('.prev')
-
-    next.addEventListener('click', function(){
-        let items = document.querySelectorAll('.item')
-        document.querySelector('.slide').appendChild(items[0])
-    })
-
-    prev.addEventListener('click', function(){
-        let items = document.querySelectorAll('.item')
-        document.querySelector('.slide').prepend(items[items.length - 1]) // here the length of items = 6
-    })
-</script>
-<script>
-    let next = document.querySelector('.next')
-    let prev = document.querySelector('.prev')
-
-    next.addEventListener('click', function(){
-        let items = document.querySelectorAll('.item')
-        document.querySelector('.slide').appendChild(items[0])
-    })
-
-    prev.addEventListener('click', function(){
-        let items = document.querySelectorAll('.item')
-        document.querySelector('.slide').prepend(items[items.length - 1])
-    })
-</script>
-
-<script>
-    const quotes = [
-        "Every storm runs out of rain—hang in there, brighter days are ahead!",
-        "You're stronger than you think and braver than you feel—keep going!",
-        "Good luck today! I know you’ll do great.",
-        "You’ve made it through tough days before, and you’ll do it again—one step at a time!",
-        "Sending you good thoughts—and hoping you believe in yourself just as much as I believe in you.",
-        "Be good to yourself. And let others be good to you, too.",
-        "You are amazing for facing this with so much courage and hope.",
-        "You’re being so strong—and patient. Keep the faith. Things are going to start looking up soon."
-    ];
-
-    let currentIndex = 0;
-    const quoteText = document.getElementById("quoteText");
-
-    function changeQuote() {
-        quoteText.classList.add("fade-out");
-        setTimeout(() => {
-            currentIndex = (currentIndex + 1) % quotes.length;
-            quoteText.textContent = quotes[currentIndex];
-            quoteText.classList.remove("fade-out");
-            quoteText.classList.add("fade-in");
-        }, 500);
+    function checkAuthStatus() {
+        fetch('/api/check-auth')
+            .then(response => response.json())
+            .then(data => {
+                if (!data.authenticated) {
+                    window.location.href = '/signin.html';
+                }
+            });
     }
 
-    setInterval(changeQuote, 3000);
-</script>
-<script>
-    document.querySelector('a[href="#main-wrapper"]').addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        const offset = target.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({
-            top: offset,
-            behavior:"smooth"
-        });
-    });
-</script>
-<script>
-    document.querySelector('a[href="#quote-section"]').addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        const offset = target.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({
-            top: offset,
-            behavior:"smooth"
-        });
-    });
-</script>
-<script>
-    document.querySelector('#see-more').addEventListener('click', function() {
-        const button = this;
+    // Check auth status periodically
+    setInterval(checkAuthStatus, 30000); // Every 30 seconds
+    function displayWelcomeMessage() {
+        fetch('/api/get-user', {
+            credentials: 'include'
+        })
+            .then(response => response.json())
+            .then(data => {
+                const welcomeMessage = document.getElementById('welcome-message');
+                if (data.first_name) {
+                    welcomeMessage.textContent = `Welcome to Your Dashboard, ${data.first_name}!`;
+                } else {
+                    // Fallback to username if first_name isn't available
+                    welcomeMessage.textContent = `Welcome, ${data.username}!`;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('welcome-message').textContent = 'Welcome!';
+            });
+    }
 
-        button.style.opacity = '0';
-        button.style.transform = 'scale(1.1)';
+    // Call this when page loads
+    document.addEventListener("DOMContentLoaded", displayWelcomeMessage);
 
-        setTimeout(function() {
-            window.location.href = 'calendar.html';
-        }, 300);
+    document.addEventListener("DOMContentLoaded", function() {
+        // Carousel/Slider Functionality
+        let next = document.querySelector('.next');
+        let prev = document.querySelector('.prev');
+
+        next.addEventListener('click', function(){
+            let items = document.querySelectorAll('.item');
+            document.querySelector('.slide').appendChild(items[0]);
+        });
+
+        prev.addEventListener('click', function(){
+            let items = document.querySelectorAll('.item');
+            document.querySelector('.slide').prepend(items[items.length - 1]);
+        });
+
+        // Quotes Rotation
+        const quotes = [
+            "Every storm runs out of rain—hang in there, brighter days are ahead!",
+            "You're stronger than you think and braver than you feel—keep going!",
+            "Good luck today! I know you'll do great.",
+            "You've made it through tough days before, and you'll do it again—one step at a time!",
+            "Sending you good thoughts—and hoping you believe in yourself just as much as I believe in you.",
+            "Be good to yourself. And let others be good to you, too.",
+            "You are amazing for facing this with so much courage and hope.",
+            "You're being so strong—and patient. Keep the faith. Things are going to start looking up soon."
+        ];
+
+        let currentIndex = 0;
+        const quoteText = document.getElementById("quoteText");
+
+        function changeQuote() {
+            quoteText.classList.add("fade-out");
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % quotes.length;
+                quoteText.textContent = quotes[currentIndex];
+                quoteText.classList.remove("fade-out");
+            }, 500);
+        }
+
+        setInterval(changeQuote, 5000);
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('id') !== 'logout-link') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // See More Buttons
+        const seeMoreButtons = document.querySelectorAll('.see-more');
+        seeMoreButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const buttonId = this.id;
+                let destination = '';
+
+                switch(buttonId) {
+                    case 'see-more':
+                        destination = 'calendar.html';
+                        break;
+                    case 'see-more1':
+                        destination = 'to-do-list.html';
+                        break;
+                    case 'see-more2':
+                        destination = 'mood-graph.html';
+                        break;
+                    case 'see-more3':
+                        destination = 'journal.html';
+                        break;
+                    case 'see-more4':
+                        destination = 'notes.html';
+                        break;
+                    default:
+                        destination = '#';
+                }
+
+                this.style.opacity = '0';
+                this.style.transform = 'scale(1.1)';
+
+                setTimeout(() => {
+                    window.location.href = destination;
+                }, 300);
+            });
+        });
+
+        // Welcome Header Animation
+        const welcomeHeading = document.querySelector('.welcome-header h1');
+        welcomeHeading.addEventListener('mouseenter', () => {
+            welcomeHeading.style.animationPlayState = 'running';
+        });
+        welcomeHeading.addEventListener('mouseleave', () => {
+            welcomeHeading.style.animationPlayState = 'paused';
+        });
+
+        // Theme Switcher
+        const themeSwitcher = document.querySelector('.theme-switcher');
+        const themeMenu = document.querySelector('.theme-menu');
+        const themeRadios = document.querySelectorAll('input[name="theme"]');
+
+        themeSwitcher.addEventListener('click', function() {
+            themeMenu.classList.toggle('show');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!themeSwitcher.contains(e.target) && !themeMenu.contains(e.target)) {
+                themeMenu.classList.remove('show');
+            }
+        });
+
+        themeRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.body.className = '';
+                document.body.classList.add(`theme-${this.value}`);
+
+                // Save theme preference to localStorage
+                localStorage.setItem('dashboardTheme', this.value);
+            });
+        });
+
+        // Load saved theme preference
+        const savedTheme = localStorage.getItem('dashboardTheme');
+        if (savedTheme) {
+            document.body.className = '';
+            document.body.classList.add(`theme-${savedTheme}`);
+            document.querySelector(`input[name="theme"][value="${savedTheme}"]`).checked = true;
+        }
+
+        // Logout Functionality
+        document.getElementById('logout-link').addEventListener('click', function(e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You'll be logged out of HeartScript!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: 'var(--primary-color)',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, log me out!',
+                background: 'var(--secondary-bg)',
+                color: 'var(--text-color)',
+                backdrop: `
+                    rgba(0, 0, 0, 0.4)
+                    url("https://i.pinimg.com/originals/d4/1c/8a/d41c8a5701a21b0a5b6ff0a3e4b6e8e2.gif")
+                    center top
+                    no-repeat
+                `
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Simulate logout API call
+                    setTimeout(() => {
+                        Swal.fire({
+                            title: 'Logged Out!',
+                            text: 'Come back soon!',
+                            icon: 'success',
+                            confirmButtonColor: 'var(--primary-color)',
+                            background: 'var(--secondary-bg)',
+                            color: 'var(--text-color)',
+                            timer: 1500,
+                            timerProgressBar: true,
+                            willClose: () => {
+                                window.location.href = 'signin.html';
+                            }
+                        });
+                    }, 500);
+                }
+            });
+        });
+
+        // Add decorative elements
+        function addRandomDoodles() {
+            const doodles = ["❤️", "✨", "🌸", "🌿", "🦋", "🌙", "☁️", "🌈", "🎀", "🍓", "🍰"];
+            const container = document.querySelector('.dashboard-container');
+
+            // Add 8 random doodles
+            for (let i = 0; i < 8; i++) {
+                const doodle = document.createElement('span');
+                doodle.textContent = doodles[Math.floor(Math.random() * doodles.length)];
+                doodle.className = 'decorative-element';
+
+                // Random position
+                doodle.style.top = `${Math.random() * 100}%`;
+                doodle.style.left = `${Math.random() * 100}%`;
+
+                // Random rotation
+                doodle.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+                container.appendChild(doodle);
+            }
+        }
+
+        // Add decorative doodles
+        addRandomDoodles();
+
+        // Authentication check (simulated)
+        function checkAuthentication() {
+            // In a real app, this would be an API call
+            // For demo purposes, we'll just simulate authentication
+            const isAuthenticated = localStorage.getItem('isAuthenticated');
+            if (!isAuthenticated) {
+                // Redirect to login page if not authenticated
+                // window.location.href = 'signin.html';
+                console.log('Authentication check would redirect to login in production');
+            }
+        }
+
+        // Run authentication check
+        checkAuthentication();
+    });
+    // Add this near the top of your script section
+    function displayWelcomeMessage() {
+        fetch('/api/get-user', {
+            credentials: 'include'
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.first_name) {
+                    const welcomeMessage = document.getElementById('welcome-message');
+                    welcomeMessage.textContent = `Welcome to Your Dashboard, ${data.first_name}!`;
+
+                    // Add cute emoji based on time of day
+                    const hour = new Date().getHours();
+                    let emoji = '🌸';
+                    if (hour < 12) emoji = '🌞';
+                    else if (hour < 18) emoji = '🌤️';
+                    else emoji = '🌙';
+
+                    welcomeMessage.innerHTML += ` <span class="welcome-emoji">${emoji}</span>`;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user data:', error);
+            });
+    }
+
+    // Call this function when the page loads
+    document.addEventListener("DOMContentLoaded", function() {
+        displayWelcomeMessage();
+        // ... rest of your existing code
     });
 </script>
 </body>
