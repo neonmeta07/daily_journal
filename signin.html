@@ -112,23 +112,32 @@
         .signin-container .buttons .reset-btn:hover {
             background-color: lightpink;
         }
+
+        .error-message {
+            color: #ff0000;
+            font-size: 12px;
+            margin-top: -10px;
+            margin-bottom: 5px;
+            display: none;
+        }
     </style>
 </head>
 <body>
 <video autoplay muted loop>
-    <source src="https://videos.pexels.com/video-files/5095965/5095965-uhd_2732_1440_25fps.mp4" type="video/mp4">
+    <source src="https://cdn.pixabay.com/video/2022/02/09/107257-678130120_large.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>
 
 <div class="signin-container">
     <h1>Sign In Here</h1>
-    <form action="/submit-signin" method="post">
-
+    <form id="signinForm">
         <label for="username">Username/ Mail Id</label>
         <input type="text" id="username" name="username" placeholder="Enter the username or Mail Id" required>
+        <div id="username-error" class="error-message"></div>
 
         <label for="password">Password</label>
         <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <div id="password-error" class="error-message"></div>
 
         <div class="buttons">
             <button type="submit" class="signin-btn">Sign In</button>
@@ -136,6 +145,74 @@
         </div>
     </form>
 </div>
+<script>
+    window.onload = function() {
+        // Clear cache for this page
+        window.history.forward();
 
+        // Prevent navigation using back button
+        if (window.history && window.history.pushState) {
+            window.history.pushState(null, null, window.location.href);
+            window.onpopstate = function() {
+                window.history.pushState(null, null, window.location.href);
+            };
+        }
+    };
+    document.getElementById('signinForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Clear previous error messages
+        document.querySelectorAll('.error-message').forEach(el => {
+            el.style.display = 'none';
+            el.textContent = '';
+        });
+
+        try {
+            const formData = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value
+            };
+
+            const response = await fetch('http://localhost:3000/submit-signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(formData),
+                credentials: 'include' // Important for sessions
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                // Handle validation errors
+                if (data.errors) {
+                    Object.entries(data.errors).forEach(([field, message]) => {
+                        const errorElement = document.getElementById(`${field}-error`);
+                        if (errorElement) {
+                            errorElement.textContent = message;
+                            errorElement.style.display = 'block';
+                        }
+                    });
+                    throw new Error(data.message || 'Validation failed');
+                }
+                throw new Error(data.message || 'Sign-in failed');
+            }
+
+            if (data.success && data.redirect) {
+                window.location.href = data.redirect;
+            } else {
+                throw new Error('Invalid server response');
+            }
+
+        } catch (error) {
+            console.error('Signin error:', error);
+            if (!document.querySelector('.error-message[style="display: block;"]')) {
+                alert(`Error: ${error.message || 'Sign-in failed. Please try again.'}`);
+            }
+        }
+    });
+</script>
 </body>
 </html>
