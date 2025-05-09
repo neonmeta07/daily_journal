@@ -11,12 +11,6 @@ Smart Scheduling: Organize your day with colorful, intuitive event planning.
 Secure & Reliable: Powered by a robust MySQL backend with transaction control and concurrency management.
 Calming Interface: A React-powered frontend styled with Tailwind CSS, designed to soothe and inspire.
 
-Installation
-
-Clone the Repository
-git clone https://github.com/neonmeta07/heartscript.git
-cd heartscript
-
 
 
 Usage
