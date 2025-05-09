@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Notes</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Indie+Flower&family=Pacifico&family=Quicksand&family=Sacramento&family=Shadows+Into+Light&family=Caveat&family=Kalam&family=Satisfy&family=Comic+Neue&display=swap" rel="stylesheet">
+    <!-- Font Awesome for cute icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<style>
+    /* Base Styles */
+    :root {
+        /* Soft Pink & Cream Theme (default) */
+        --background: #fff5f7;
+        --sidebar-bg: #f8e1e5;
+        --paper-bg: #fffaf0;
+        --text-color: #5d4037;
+        --accent-color: #e57373;
+        --border-color: #d7ccc8;
+        --shadow-color: rgba(93, 64, 55, 0.2);
+        --doodle-color: #f48fb1;
+        --entry-bg: #fff9f9;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Quicksand', sans-serif;
+        background-color: var(--background);
+        color: var(--text-color);
+        line-height: 1.6;
+        transition: all 0.3s ease;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Header Styles */
+    header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    header h1 {
+        font-family: 'Dancing Script', cursive;
+        font-size: 3rem;
+        color: var(--accent-color);
+        margin-bottom: 5px;
+        text-shadow: 2px 2px 3px var(--shadow-color);
+    }
+
+    #date {
+        font-size: 1rem;
+        color: var(--text-color);
+        font-style: italic;
+    }
+
+    /* Main Layout */
+    main {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+        flex: 0 0 250px;
+        background-color: var(--sidebar-bg);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 8px var(--shadow-color);
+        transition: all 0.3s ease;
+    }
+
+    .sidebar-section {
+        margin-bottom: 25px;
+    }
+
+    .sidebar-section h3 {
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 5px;
+    }
+
+    /* Theme Options */
+    .theme-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .theme-option {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .theme-option input {
+        margin-right: 10px;
+    }
+
+    .theme-preview {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin-right: 10px;
+        border: 1px solid var(--border-color);
+    }
+    .custom-select {
+        width: 100%;
+        padding: 8px 12px;
+        border-radius: 20px;
+        border: 1px solid var(--border-color);
+        background-color: var(--secondary-bg);
+        color: var(--text-color);
+        font-size: 14px;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238b5a4c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 16px;
+    }
+
+    .custom-select:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px var(--accent-color);
+    }
+    .custom-select:hover{
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px var(--accent-color);
+    }
+
+    /* Notes Container */
+    .notes-container {
+        flex: 1;
+        min-width: 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Current Note Section */
+    .current-note {
+        background-color: var(--paper-bg);
+        border-radius: 10px;
+        box-shadow: 0 5px 15px var(--shadow-color);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .paper-content {
+        padding: 30px;
+    }
+
+    textarea {
+        width: 100%;
+        height: 200px;
+        border: none;
+        background-color: transparent;
+        resize: none;
+        font-family: inherit;
+        font-size: 16px;
+        color: var(--text-color);
+        line-height: 1.6;
+        outline: none;
+    }
+
+    /* Saved Notes Section */
+    .saved-notes {
+        background-color: var(--sidebar-bg);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px var(--shadow-color);
+    }
+
+    .saved-notes h3 {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .notes-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        max-height: 300px;
+        overflow-y: auto;
+        padding-right: 10px;
+    }
+
+    .note-entry {
+        background-color: var(--entry-bg);
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px var(--shadow-color);
+        position: relative;
+        transition: all 0.2s ease;
+    }
+
+    .note-entry:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px var(--shadow-color);
+    }
+
+    .note-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        color: var(--accent-color);
+    }
+
+    .note-date {
+        font-style: italic;
+    }
+
+    .note-content {
+        white-space: pre-wrap;
+        margin-bottom: 10px;
+    }
+
+    .note-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+    }
+
+    .note-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.2s ease;
+    }
+
+    .edit-btn {
+        color: var(--accent-color);
+    }
+
+    .delete-btn {
+        color: #e57373;
+    }
+
+    .note-btn:hover {
+        transform: scale(1.2);
+    }
+
+    /* Save Button */
+    .save-button {
+        width: 100%;
+        padding: 12px;
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        cursor: pointer;
+        box-shadow: 0 2px 5px var(--shadow-color);
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .save-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px var(--shadow-color);
+    }
+
+    .save-button:active {
+        transform: translateY(0);
+    }
+
+    /* Decorative Elements */
+    .corner-doodle {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        opacity: 0.6;
+        z-index: 1;
+    }
+
+    .top-left {
+        top: 5px;
+        left: 5px;
+    }
+
+    .top-right {
+        top: 5px;
+        right: 5px;
+    }
+
+    /* Confetti Effect */
+    .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background-color: var(--accent-color);
+        opacity: 0;
+        z-index: 1000;
+        animation: confetti-fall 2s ease-out;
+    }
+
+    @keyframes confetti-fall {
+        0% {
+            transform: translateY(-100px) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(100vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    /* Empty State */
+    .empty-notes {
+        text-align: center;
+        padding: 20px;
+        color: var(--text-color);
+        opacity: 0.7;
+        font-style: italic;
+    }
+
+    /* Theme Classes */
+    body.soft-pink {
+        --background: #fff5f7;
+        --sidebar-bg: #f8e1e5;
+        --paper-bg: #fffaf0;
+        --text-color: #5d4037;
+        --accent-color: #e57373;
+        --border-color: #d7ccc8;
+        --shadow-color: rgba(93, 64, 55, 0.2);
+        --doodle-color: #f48fb1;
+        --entry-bg: #fff9f9;
+    }
+
+    body.vintage-brown {
+        --background: #efebe9;
+        --sidebar-bg: #d7ccc8;
+        --paper-bg: #f5f5dc;
+        --text-color: #4e342e;
+        --accent-color: #f48fb1;
+        --border-color: #bcaaa4;
+        --shadow-color: rgba(78, 52, 46, 0.2);
+        --doodle-color: #f48fb1;
+        --entry-bg: #f8f4e5;
+    }
+
+    body.blush-gold {
+        --background: #fce4ec;
+        --sidebar-bg: #f8bbd0;
+        --paper-bg: #fff8e1;
+        --text-color: #4e342e;
+        --accent-color: #ffb74d;
+        --border-color: #ffcc80;
+        --shadow-color: rgba(78, 52, 46, 0.2);
+        --doodle-color: #ffb74d;
+        --entry-bg: #fffbf0;
+    }
+
+    body.dark-chocolate {
+        --background: #3e2723;
+        --sidebar-bg: #4e342e;
+        --paper-bg: #5d4037;
+        --text-color: #f8bbd0;
+        --accent-color: #f48fb1;
+        --border-color: #6d4c41;
+        --shadow-color: rgba(0, 0, 0, 0.3);
+        --doodle-color: #f48fb1;
+        --entry-bg: #6d4c41;
+    }
+
+    body.kawaii-pink {
+        --background: #fce4ec;
+        --sidebar-bg: #f8bbd0;
+        --paper-bg: #fff5f7;
+        --text-color: #ad1457;
+        --accent-color: #f06292;
+        --border-color: #f48fb1;
+        --shadow-color: rgba(173, 20, 87, 0.2);
+        --doodle-color: #f06292;
+        --entry-bg: #ffebee;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        main {
+            flex-direction: column;
+        }
+
+        .sidebar {
+            width: 100%;
+        }
+
+        .notes-container {
+            width: 100%;
+        }
+    }
+</style>
+<body class="soft-pink">
+<div class="container">
+    <header>
+        <h1 id="title">My Notes</h1>
+        <div id="date"></div>
+    </header>
+
+    <main>
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h3>Theme</h3>
+                <div class="theme-options">
+                    <label class="theme-option">
+                        <input type="radio" name="theme" value="soft-pink" checked>
+                        <span class="theme-preview" style="background: linear-gradient(135deg, #f8e1e5 0%, #fffaf0 100%);"></span>
+                        <span class="theme-name">Soft Pink & Cream</span>
+                    </label>
+                    <label class="theme-option">
+                        <input type="radio" name="theme" value="vintage-brown">
+                        <span class="theme-preview" style="background: linear-gradient(135deg, #d7ccc8 0%, #f5f5dc 100%);"></span>
+                        <span class="theme-name">Vintage Brown</span>
+                    </label>
+                    <label class="theme-option">
+                        <input type="radio" name="theme" value="blush-gold">
+                        <span class="theme-preview" style="background: linear-gradient(135deg, #f8bbd0 0%, #fff8e1 100%);"></span>
+                        <span class="theme-name">Blush & Gold</span>
+                    </label>
+                    <label class="theme-option">
+                        <input type="radio" name="theme" value="dark-chocolate">
+                        <span class="theme-preview" style="background: linear-gradient(135deg, #4e342e 0%, #5d4037 100%);"></span>
+                        <span class="theme-name">Dark Chocolate</span>
+                    </label>
+                    <label class="theme-option">
+                        <input type="radio" name="theme" value="kawaii-pink">
+                        <span class="theme-preview" style="background: linear-gradient(135deg, #f8bbd0 0%, #fff5f7 100%);"></span>
+                        <span class="theme-name">Kawaii Pink</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Font Style</h3>
+                <select id="font-style" class="custom-select">
+                    <option value="'Quicksand', sans-serif">Classic</option>
+                    <option value="'Dancing Script', cursive">Dancing Script</option>
+                    <option value="'Indie Flower', cursive">Indie Flower</option>
+                    <option value="'Comic Neue', cursive">Comic Neue</option>
+                    <option value="'Pacifico', cursive">Pacifico</option>
+                </select>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Font Size</h3>
+                <input type="range" id="font-size" min="12" max="24" value="16">
+                <div id="font-size-display">16px</div>
+            </div>
+
+            <button id="save-btn" class="save-button">
+                <i class="fas fa-heart"></i> Save Note
+            </button>
+        </div>
+
+        <div class="notes-container">
+            <div class="current-note">
+                <div class="paper-content">
+                    <textarea id="note-content" placeholder="Write your notes here... ✨"></textarea>
+                </div>
+                <div class="corner-doodle top-left">
+                    <i class="fas fa-star" style="color: var(--doodle-color); font-size: 24px;"></i>
+                </div>
+                <div class="corner-doodle top-right">
+                    <i class="fas fa-heart" style="color: var(--doodle-color); font-size: 24px;"></i>
+                </div>
+            </div>
+
+            <div class="saved-notes">
+                <h3><i class="fas fa-book"></i> Saved Notes</h3>
+                <div class="notes-list" id="notes-list">
+                    <!-- Notes will be added here dynamically -->
+                    <div class="empty-notes">No notes yet - write something lovely!</div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Display current date
+        const dateElement = document.getElementById('date');
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const today = new Date();
+        dateElement.textContent = today.toLocaleDateString('en-US', options);
+
+        // DOM Elements
+        const noteContent = document.getElementById('note-content');
+        const fontStyle = document.getElementById('font-style');
+        const fontSize = document.getElementById('font-size');
+        const fontSizeDisplay = document.getElementById('font-size-display');
+        const saveBtn = document.getElementById('save-btn');
+        const themeOptions = document.querySelectorAll('input[name="theme"]');
+        const notesList = document.getElementById('notes-list');
+
+        // Load saved notes from localStorage
+        let notes = JSON.parse(localStorage.getItem('savedNotes')) || [];
+
+        // Load preferences
+        const prefs = JSON.parse(localStorage.getItem('notePreferences')) || {};
+
+        // Apply preferences
+        if (prefs.fontStyle) {
+            fontStyle.value = prefs.fontStyle;
+            noteContent.style.fontFamily = prefs.fontStyle;
+        }
+
+        if (prefs.fontSize) {
+            fontSize.value = prefs.fontSize;
+            fontSizeDisplay.textContent = `${prefs.fontSize}px`;
+            noteContent.style.fontSize = `${prefs.fontSize}px`;
+        }
+
+        if (prefs.theme) {
+            document.body.className = prefs.theme;
+            document.querySelector(`input[value="${prefs.theme}"]`).checked = true;
+        }
+
+        // Render existing notes
+        renderNotes();
+
+        // Event Listeners
+        fontStyle.addEventListener('change', function() {
+            noteContent.style.fontFamily = this.value;
+            savePreferences();
+        });
+
+        fontSize.addEventListener('input', function() {
+            const size = this.value;
+            fontSizeDisplay.textContent = `${size}px`;
+            noteContent.style.fontSize = `${size}px`;
+            savePreferences();
+        });
+
+        themeOptions.forEach(option => {
+            option.addEventListener('change', function() {
+                if (this.checked) {
+                    document.body.className = this.value;
+                    savePreferences();
+                }
+            });
+        });
+
+        // Save Note
+        saveBtn.addEventListener('click', saveNote);
+
+        // Auto-save preferences
+        function savePreferences() {
+            const prefs = {
+                fontStyle: fontStyle.value,
+                fontSize: fontSize.value,
+                theme: document.body.className
+            };
+            localStorage.setItem('notePreferences', JSON.stringify(prefs));
+        }
+
+        // Save Note Function
+        function saveNote() {
+            const content = noteContent.value.trim();
+            if (!content) return;
+
+            const newNote = {
+                id: Date.now(),
+                content: content,
+                date: new Date().toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }),
+                timestamp: new Date().getTime()
+            };
+
+            notes.unshift(newNote); // Add to beginning of array
+            localStorage.setItem('savedNotes', JSON.stringify(notes));
+
+            // Clear and render
+            noteContent.value = '';
+            renderNotes();
+
+            // Confetti effect
+            createConfetti();
+
+            // Button animation
+            saveBtn.innerHTML = '<i class="fas fa-check"></i> Saved!';
+            setTimeout(() => {
+                saveBtn.innerHTML = '<i class="fas fa-heart"></i> Save Note';
+            }, 1500);
+        }
+
+        // Render Notes
+        function renderNotes() {
+            if (notes.length === 0) {
+                notesList.innerHTML = '<div class="empty-notes">No notes yet - write something lovely!</div>';
+                return;
+            }
+
+            notesList.innerHTML = '';
+            notes.forEach(note => {
+                const noteEl = document.createElement('div');
+                noteEl.className = 'note-entry';
+                noteEl.innerHTML = `
+                    <div class="note-header">
+                        <span class="note-date">${note.date}</span>
+                    </div>
+                    <div class="note-content">${note.content}</div>
+                    <div class="note-actions">
+                        <button class="note-btn edit-btn" data-id="${note.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="note-btn delete-btn" data-id="${note.id}">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                `;
+                notesList.appendChild(noteEl);
+            });
+
+            // Add event listeners to new buttons
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', editNote);
+            });
+
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', deleteNote);
+            });
+        }
+
+        // Edit Note
+        function editNote(e) {
+            const id = parseInt(e.currentTarget.getAttribute('data-id'));
+            const note = notes.find(n => n.id === id);
+
+            noteContent.value = note.content;
+            noteContent.focus();
+
+            // Remove the note (will be re-added when saved)
+            notes = notes.filter(n => n.id !== id);
+            localStorage.setItem('savedNotes', JSON.stringify(notes));
+            renderNotes();
+        }
+
+        // Delete Note
+        function deleteNote(e) {
+            const id = parseInt(e.currentTarget.getAttribute('data-id'));
+
+            // Animation
+            const noteEl = e.currentTarget.closest('.note-entry');
+            noteEl.style.transform = 'scale(0.9)';
+            noteEl.style.opacity = '0';
+            setTimeout(() => {
+                notes = notes.filter(n => n.id !== id);
+                localStorage.setItem('savedNotes', JSON.stringify(notes));
+                renderNotes();
+            }, 300);
+        }
+
+        // Confetti Effect
+        function createConfetti() {
+            const colors = ['#f48fb1', '#e57373', '#ffb74d', '#fff176', '#81c784', '#4fc3f7', '#9575cd'];
+
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 2000);
+            }
+        }
+
+        // Keyboard shortcut (Ctrl+Enter to save)
+        noteContent.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                saveNote();
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Journal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Indie+Flower&family=Pacifico&family=Caveat&family=Sacramento&family=Quicksand&family=Comfortaa&family=Poppins&family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<style>
+    /* Base Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Quicksand", sans-serif;
+        min-height: 100vh;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Theme Variables */
+    .theme-soft-pink {
+        --primary-bg: #fff5f7;
+        --secondary-bg: #fff;
+        --primary-color: #8b5a4c;
+        --secondary-color: #d6a3a3;
+        --accent-color: #f7caca;
+        --text-color: #5d4037;
+        --border-color: #e8c4c4;
+        --paper-texture: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23f7d6d6' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
+
+    .theme-vintage-brown {
+        --primary-bg: #f5efe0;
+        --secondary-bg: #f9f3e6;
+        --primary-color: #8d6e63;
+        --secondary-color: #c48b9f;
+        --accent-color: #d7ccc8;
+        --text-color: #5d4037;
+        --border-color: #bcaaa4;
+        --paper-texture: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23bcaaa4' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
+
+    .theme-blush-gold {
+        --primary-bg: #fce4ec;
+        --secondary-bg: #fff9e6;
+        --primary-color: #c2985b;
+        --secondary-color: #f48fb1;
+        --accent-color: #ffe0b2;
+        --text-color: #8d6e63;
+        --border-color: #ffcc80;
+        --paper-texture: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffcc80' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
+
+    .theme-dark-chocolate {
+        --primary-bg: #5d4037;
+        --secondary-bg: #795548;
+        --primary-color: #f8bbd0;
+        --secondary-color: #a1887f;
+        --accent-color: #d7ccc8;
+        --text-color: #f8bbd0;
+        --border-color: #8d6e63;
+        --paper-texture: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23a1887f' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
+
+    .theme-pastel-rainbow {
+        --primary-bg: #f8e1f4;
+        --secondary-bg: #fff;
+        --primary-color: #b39ddb;
+        --secondary-color: #ffab91;
+        --accent-color: #b2ebf2;
+        --text-color: #7e57c2;
+        --border-color: #c5cae9;
+        --paper-texture: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23c5cae9' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
+
+    .theme-kawaii-pink {
+        --primary-bg: #ffcce6;
+        --secondary-bg: #fff0f7;
+        --primary-color: #ff66b3;
+        --secondary-color: #b3e0ff;
+        --accent-color: #ffe6f2;
+        --text-color: #cc0066;
+        --border-color: #ffb3d9;
+        --paper-texture: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffb3d9' fill-opacity='0.3' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
+
+    body {
+        background-color: var(--primary-bg);
+        color: var(--text-color);
+    }
+
+    /* Layout */
+    .journal-container {
+        display: flex;
+        min-height: 100vh;
+        position: relative;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+        width: 280px;
+        background-color: var(--secondary-bg);
+        border-right: 1px solid var(--border-color);
+        position: relative;
+        transition: transform 0.3s ease;
+        z-index: 10;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .sidebar-content {
+        padding: 20px;
+        height: 100vh;
+        overflow-y: auto;
+    }
+
+    .sidebar h3 {
+        font-family: "Dancing Script", cursive;
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: var(--primary-color);
+        text-align: center;
+    }
+
+    .customize-section {
+        margin-bottom: 25px;
+    }
+
+    .customize-section h4 {
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: var(--primary-color);
+    }
+
+    /* Theme Options */
+    .theme-options {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .theme-option {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .theme-option input {
+        display: none;
+    }
+
+    .theme-preview {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        margin-right: 10px;
+        border: 2px solid transparent;
+        position: relative;
+    }
+
+    .theme-option input:checked + .theme-preview {
+        border-color: var(--primary-color);
+    }
+
+    .theme-option input:checked + .theme-preview::after {
+        content: "✓";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 12px;
+        color: white;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .theme-preview.soft-pink {
+        background: linear-gradient(135deg, #fff5f7 50%, #d6a3a3 50%);
+    }
+
+    .theme-preview.vintage-brown {
+        background: linear-gradient(135deg, #f5efe0 50%, #c48b9f 50%);
+    }
+
+    .theme-preview.blush-gold {
+        background: linear-gradient(135deg, #fce4ec 50%, #c2985b 50%);
+    }
+
+    .theme-preview.dark-chocolate {
+        background: linear-gradient(135deg, #5d4037 50%, #f8bbd0 50%);
+    }
+
+    .theme-preview.pastel-rainbow {
+        background: linear-gradient(135deg, #f8e1f4 50%, #b2ebf2 50%);
+    }
+
+    .theme-preview.kawaii-pink {
+        background: linear-gradient(135deg, #ffcce6 50%, #ff66b3 50%);
+    }
+
+    .theme-name {
+        font-size: 14px;
+    }
+
+    /* Custom Select */
+    .custom-select {
+        width: 100%;
+        padding: 8px 12px;
+        border-radius: 20px;
+        border: 1px solid var(--border-color);
+        background-color: var(--secondary-bg);
+        color: var(--text-color);
+        font-size: 14px;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238b5a4c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 16px;
+    }
+
+    .custom-select:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px var(--accent-color);
+    }
+
+    /* Slider */
+    .slider-container {
+        width: 100%;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 6px;
+        border-radius: 5px;
+        background: var(--accent-color);
+        outline: none;
+        margin-bottom: 10px;
+    }
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .slider::-webkit-slider-thumb:hover {
+        transform: scale(1.1);
+    }
+
+    .slider::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: none;
+    }
+
+    .slider::-moz-range-thumb:hover {
+        transform: scale(1.1);
+    }
+
+    .slider-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: var(--text-color);
+    }
+
+    /* Formatting Buttons */
+    .formatting-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .format-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: var(--secondary-bg);
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s ease;
+    }
+
+    .format-btn:hover {
+        background-color: var(--accent-color);
+        transform: translateY(-2px);
+    }
+
+    .format-btn.active {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+    /* Stickers */
+    .stickers-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .sticker-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: var(--secondary-bg);
+        border: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 18px;
+        transition: all 0.2s ease;
+    }
+
+    .sticker-btn:hover {
+        transform: scale(1.1);
+        background-color: var(--accent-color);
+    }
+
+    .sticker-container {
+        position: absolute;
+        pointer-events: none;
+        z-index: 5;
+    }
+
+    .sticker {
+        position: absolute;
+        font-size: 24px;
+        transform-origin: center;
+        animation: sticker-appear 0.3s forwards;
+    }
+
+    @keyframes sticker-appear {
+        0% {
+            transform: scale(0) rotate(0deg);
+            opacity: 0;
+        }
+        100% {
+            transform: scale(1) rotate(10deg);
+            opacity: 1;
+        }
+    }
+
+    /* Page Style Options */
+    .page-style-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .page-style-option {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .page-style-option input {
+        margin-right: 5px;
+    }
+
+    .page-style-name {
+        font-size: 14px;
+    }
+
+    /* View Entries Button */
+    .view-entries-btn {
+        width: 100%;
+        padding: 10px 15px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .view-entries-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Toggle Sidebar Button */
+    .toggle-sidebar {
+        position: absolute;
+        top: 20px;
+        right: -15px;
+        width: 30px;
+        height: 30px;
+        background-color: var(--secondary-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 20;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .toggle-icon {
+        color: var(--primary-color);
+        font-size: 18px;
+    }
+
+    /* Main Journal Area */
+    .journal-main {
+        flex: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--primary-bg);
+        background-image: var(--paper-texture);
+    }
+
+    .journal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .journal-header h1 {
+        font-family: "Dancing Script", cursive;
+        font-size: 42px;
+        color: var(--primary-color);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .date-picker input {
+        padding: 8px 12px;
+        border-radius: 20px;
+        border: 1px solid var(--border-color);
+        background-color: var(--secondary-bg);
+        color: var(--text-color);
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .date-picker input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px var(--accent-color);
+    }
+
+    /* Journal Page */
+    .journal-page {
+        flex: 1;
+        background-color: var(--secondary-bg);
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background-position: 0 0, 0 0;
+    }
+
+    .journal-page.lined {
+        background-image: linear-gradient(var(--border-color) 1px, transparent 1px), var(--paper-texture);
+        background-size: 100% 28px, 100px 100px;
+    }
+
+    .journal-page.dotted {
+        background-image: radial-gradient(var(--border-color) 1px, transparent 1px), var(--paper-texture);
+        background-size: 15px 15px, 100px 100px;
+    }
+
+    .journal-page.grid {
+        background-image: linear-gradient(var(--border-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border-color) 1px, transparent 1px), var(--paper-texture);
+        background-size: 20px 20px, 20px 20px, 100px 100px;
+    }
+
+    .journal-page.blank {
+        background-image: var(--paper-texture);
+        background-size: 100px 100px;
+    }
+
+    .page-content {
+        flex: 1;
+        position: relative;
+    }
+
+    #journal-entry {
+        width: 100%;
+        height: 100%;
+        min-height: 300px;
+        background: transparent;
+        border: none;
+        line-height: 28px;
+        padding: 0 10px;
+        font-size: 18px;
+        color: var(--text-color);
+        font-family: "Georgia", serif;
+        outline: none;
+        overflow-y: auto;
+    }
+
+    #journal-entry:empty:before {
+        content: attr(placeholder);
+        color: var(--text-color);
+        opacity: 0.5;
+    }
+
+    /* Mood Tracker */
+    .mood-tracker {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: var(--accent-color);
+        border-radius: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .mood-label {
+        margin-right: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+
+    .mood-options {
+        display: flex;
+        gap: 10px;
+    }
+
+    .mood-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: var(--secondary-bg);
+        border: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 18px;
+        transition: all 0.2s ease;
+    }
+
+    .mood-btn:hover {
+        transform: scale(1.1);
+    }
+
+    .mood-btn.selected {
+        border: 2px solid var(--primary-color);
+        transform: scale(1.1);
+    }
+
+    /* Save Button */
+    .save-button {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease;
+    }
+
+    .save-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .save-button:active {
+        transform: translateY(0);
+    }
+
+    .save-icon {
+        font-size: 18px;
+    }
+
+    /* Entries Modal */
+    .entries-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 100;
+        overflow-y: auto;
+    }
+
+    .entries-modal.show {
+        display: block;
+    }
+
+    .entries-modal-content {
+        position: relative;
+        width: 90%;
+        max-width: 900px;
+        margin: 50px auto;
+        background-color: var(--secondary-bg);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .entries-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .entries-header h2 {
+        font-family: "Dancing Script", cursive;
+        font-size: 32px;
+        color: var(--primary-color);
+    }
+
+    .close-modal {
+        background: none;
+        border: none;
+        font-size: 28px;
+        color: var(--text-color);
+        cursor: pointer;
+    }
+
+    .entries-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .entry-card {
+        position: relative;
+        height: 200px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .entry-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .entry-thumbnail {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .entry-date {
+        font-family: "Dancing Script", cursive;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        text-align: center;
+        color: var(--primary-color);
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        padding: 3px 8px;
+        align-self: center;
+    }
+
+    .entry-preview {
+        font-size: 12px;
+        line-height: 1.4;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        flex: 1;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 8px;
+        padding: 8px;
+        margin-top: 5px;
+    }
+
+    .entry-mood {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 24px;
+        filter: drop-shadow(0 0 2px white);
+    }
+
+    .entry-decoration {
+        position: absolute;
+        font-size: 20px;
+        opacity: 0.5;
+        z-index: 0;
+    }
+
+    .entry-decoration:nth-child(1) {
+        top: 10%;
+        left: 10%;
+        transform: rotate(-15deg);
+    }
+
+    .entry-decoration:nth-child(2) {
+        top: 20%;
+        right: 15%;
+        transform: rotate(20deg);
+    }
+
+    .entry-decoration:nth-child(3) {
+        bottom: 15%;
+        left: 20%;
+        transform: rotate(10deg);
+    }
+
+    /* Save Confirmation */
+    .save-confirmation {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: var(--secondary-bg);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 100;
+    }
+
+    .save-confirmation.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .heart {
+        font-size: 40px;
+        color: var(--secondary-color);
+        animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.2);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .save-confirmation p {
+        margin-top: 10px;
+        font-size: 18px;
+        color: var(--primary-color);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .journal-container {
+            flex-direction: column;
+        }
+
+        .sidebar {
+            width: 100%;
+            border-right: none;
+            border-bottom: 1px solid var(--border-color);
+            transform: translateY(-100%);
+            position: absolute;
+            height: 100vh;
+        }
+
+        .sidebar.open {
+            transform: translateY(0);
+        }
+
+        .toggle-sidebar {
+            top: auto;
+            bottom: -15px;
+            right: 20px;
+            transform: rotate(90deg);
+        }
+
+        .sidebar.open .toggle-sidebar {
+            transform: rotate(-90deg);
+        }
+
+        .journal-main {
+            padding-top: 60px;
+        }
+
+        .journal-header {
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .entries-container {
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        }
+    }
+
+    /* Decorative Elements */
+    .journal-page::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        width: 30px;
+        height: 30px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30' fill='none'%3E%3Cpath d='M5 5C5 2.79086 6.79086 1 9 1H25C27.2091 1 29 2.79086 29 5V21C29 23.2091 27.2091 25 25 25H9C6.79086 25 5 23.2091 5 21V5Z' stroke='%23d6a3a3' stroke-width='2'/%3E%3Cpath d='M15 5L5 15M20 5L5 20M25 5L5 25M29 10L10 29M29 15L15 29M29 20L20 29M29 25L25 29' stroke='%23d6a3a3' stroke-width='1'/%3E%3C/svg%3E");
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    .journal-page::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        right: -5px;
+        width: 30px;
+        height: 30px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30' fill='none'%3E%3Cpath d='M25 25C27.2091 25 29 23.2091 29 21V5C29 2.79086 27.2091 1 25 1H9C6.79086 1 5 2.79086 5 5V21C5 23.2091 6.79086 25 9 25H25Z' stroke='%23d6a3a3' stroke-width='2'/%3E%3Cpath d='M15 25L25 15M10 25L25 10M5 25L25 5M1 20L20 1M1 15L15 1M1 10L10 1M1 5L5 1' stroke='%23d6a3a3' stroke-width='1'/%3E%3C/svg%3E");
+        transform: rotate(180deg);
+        opacity: 0.5;
+        pointer-events: none;
+    }
+    .entry-actions {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        display: flex;
+        gap: 5px;
+    }
+
+    .delete-entry-btn {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: none;
+        color: #ff5252;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.2s ease;
+    }
+
+    .delete-entry-btn:hover {
+        background-color: #ff5252;
+        color: white;
+        transform: scale(1.1);
+    }
+
+    .entry-card {
+        position: relative;
+    }
+
+</style>
+<body class="theme-soft-pink">
+<div class="journal-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-content">
+            <h3>Customize</h3>
+
+            <div class="customize-section">
+                <h4>Theme</h4>
+                <div class="theme-options">
+                    <label class="theme-option">
+                        <input type="radio" name="theme" value="soft-pink" checked>
+                        <span class="theme-preview soft-pink"></span>
+                        <span class="theme-name">Soft Pink & Cream</span>
+                    </label>
+                    <label class="theme-option">
+                        <input type="radio" name="theme" value="vintage-brown">
+                        <span class="theme-preview vintage-brown"></span>
+                        <span class="theme-name">Vintage Brown & Rose</span>
+                    </label>
+                    <label class="theme-option">
+                        <input type="radio" name="theme" value="blush-gold">
+                        <span class="theme-preview blush-gold"></span>
+                        <span class="theme-name">Blush & Gold</span>
+                    </label>
+                    <label class="theme-option">
+                        <input type="radio" name="theme" value="dark-chocolate">
+                        <span class="theme-preview dark-chocolate"></span>
+                        <span class="theme-name">Dark Chocolate & Pink</span>
+                    </label>
+                    <label class="theme-option">
+                        <input type="radio" name="theme" value="pastel-rainbow">
+                        <span class="theme-preview pastel-rainbow"></span>
+                        <span class="theme-name">Pastel Rainbow</span>
+                    </label>
+                    <label class="theme-option">
+                        <input type="radio" name="theme" value="kawaii-pink">
+                        <span class="theme-preview kawaii-pink"></span>
+                        <span class="theme-name">Kawaii Pink</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="customize-section">
+                <h4>Font Style</h4>
+                <select id="font-style" class="custom-select">
+                    <option value="'Dancing Script', cursive">Dancing Script</option>
+                    <option value="'Indie Flower', cursive">Indie Flower</option>
+                    <option value="'Pacifico', cursive">Pacifico</option>
+                    <option value="'Caveat', cursive">Caveat</option>
+                    <option value="'Sacramento', cursive">Sacramento</option>
+                    <option value="'Quicksand', sans-serif">Quicksand</option>
+                    <option value="'Comfortaa', sans-serif">Comfortaa</option>
+                    <option value="'Poppins', sans-serif">Poppins</option>
+                    <option value="'Montserrat', sans-serif">Montserrat</option>
+                </select>
+            </div>
+
+            <div class="customize-section">
+                <h4>Font Size</h4>
+                <div class="slider-container">
+                    <input type="range" min="14" max="24" value="18" class="slider" id="font-size">
+                    <div class="slider-labels">
+                        <span>Small</span>
+                        <span>Medium</span>
+                        <span>Large</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="customize-section">
+                <h4>Text Formatting</h4>
+                <div class="formatting-buttons">
+                    <button id="format-bold" class="format-btn" title="Bold">B</button>
+                    <button id="format-italic" class="format-btn" title="Italic"><i>I</i></button>
+                    <button id="format-underline" class="format-btn" title="Underline"><u>U</u></button>
+                    <button id="format-bullet" class="format-btn" title="Bullet Points">•</button>
+                    <button id="format-number" class="format-btn" title="Numbered List">1.</button>
+                    <button id="format-heart" class="format-btn" title="Heart Bullet">❤</button>
+                    <button id="format-star" class="format-btn" title="Star Bullet">★</button>
+                </div>
+            </div>
+
+            <div class="customize-section">
+                <h4>Stickers</h4>
+                <div class="stickers-container">
+                    <button class="sticker-btn" data-sticker="❤️">❤️</button>
+                    <button class="sticker-btn" data-sticker="🌸">🌸</button>
+                    <button class="sticker-btn" data-sticker="✨">✨</button>
+                    <button class="sticker-btn" data-sticker="🦋">🦋</button>
+                    <button class="sticker-btn" data-sticker="🌈">🌈</button>
+                    <button class="sticker-btn" data-sticker="🌙">🌙</button>
+                    <button class="sticker-btn" data-sticker="☁️">☁️</button>
+                    <button class="sticker-btn" data-sticker="🍓">🍓</button>
+                    <button class="sticker-btn" data-sticker="🌿">🌿</button>
+                    <button class="sticker-btn" data-sticker="🍰">🍰</button>
+                    <button class="sticker-btn" data-sticker="🎀">🎀</button>
+                    <button class="sticker-btn" data-sticker="🌷">🌷</button>
+                </div>
+            </div>
+
+            <div class="customize-section">
+                <h4>Page Style</h4>
+                <div class="page-style-options">
+                    <label class="page-style-option">
+                        <input type="radio" name="page-style" value="lined" checked>
+                        <span class="page-style-name">Lined</span>
+                    </label>
+                    <label class="page-style-option">
+                        <input type="radio" name="page-style" value="dotted">
+                        <span class="page-style-name">Dotted</span>
+                    </label>
+                    <label class="page-style-option">
+                        <input type="radio" name="page-style" value="grid">
+                        <span class="page-style-name">Grid</span>
+                    </label>
+                    <label class="page-style-option">
+                        <input type="radio" name="page-style" value="blank">
+                        <span class="page-style-name">Blank</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="customize-section">
+                <h4>My Entries</h4>
+                <button id="view-entries-btn" class="view-entries-btn">
+                    <span>View All Entries</span>
+                </button>
+            </div>
+        </div>
+
+        <button class="toggle-sidebar">
+            <span class="toggle-icon">≡</span>
+        </button>
+    </div>
+
+    <!-- Main Journal Area -->
+    <div class="journal-main">
+        <div class="journal-header">
+            <h1>My Journal</h1>
+            <div class="date-picker">
+                <input type="date" id="entry-date">
+            </div>
+        </div>
+
+        <div class="journal-page lined">
+            <div class="page-content">
+                <div id="journal-entry" contenteditable="true" placeholder="Dear Diary, today was..."></div>
+            </div>
+
+            <div class="mood-tracker">
+                <span class="mood-label">Today's Mood:</span>
+                <div class="mood-options">
+                    <button class="mood-btn" data-mood="happy">😊</button>
+                    <button class="mood-btn" data-mood="sad">😢</button>
+                    <button class="mood-btn" data-mood="excited">🤩</button>
+                    <button class="mood-btn" data-mood="tired">😴</button>
+                    <button class="mood-btn" data-mood="loved">🥰</button>
+                </div>
+            </div>
+
+            <button id="save-button" class="save-button">
+                <span class="save-icon">✓</span>
+                <span class="save-text">Save Entry</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Entries Modal -->
+<div id="entries-modal" class="entries-modal">
+    <div class="entries-modal-content">
+        <div class="entries-header">
+            <h2>My Journal Entries</h2>
+            <button class="close-modal">×</button>
+        </div>
+        <div class="entries-container">
+            <!-- Entries will be populated here -->
+        </div>
+    </div>
+</div>
+
+<div class="save-confirmation">
+    <div class="heart">❤</div>
+    <p>Entry Saved!</p>
+</div>
+
+<div class="sticker-container"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Set today's date as default
+        const today = new Date().toISOString().split("T")[0]
+        document.getElementById("entry-date").value = today
+
+        // Theme Switching
+        const themeRadios = document.querySelectorAll('input[name="theme"]')
+        themeRadios.forEach((radio) => {
+            radio.addEventListener("change", function () {
+                document.body.className = ""
+                document.body.classList.add(`theme-${this.value}`)
+            })
+        })
+
+        // Font Style Changing
+        const fontStyleSelect = document.getElementById("font-style")
+        const journalEntry = document.getElementById("journal-entry")
+
+        fontStyleSelect.addEventListener("change", function () {
+            journalEntry.style.fontFamily = this.value
+        })
+
+        // Font Size Changing
+        const fontSizeSlider = document.getElementById("font-size")
+
+        fontSizeSlider.addEventListener("input", function () {
+            journalEntry.style.fontSize = `${this.value}px`
+        })
+
+        // Toggle Sidebar
+        const toggleSidebarBtn = document.querySelector(".toggle-sidebar")
+        const sidebar = document.querySelector(".sidebar")
+
+        toggleSidebarBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("open")
+        })
+
+        // Text Formatting
+        const formatBold = document.getElementById("format-bold")
+        const formatItalic = document.getElementById("format-italic")
+        const formatUnderline = document.getElementById("format-underline")
+        const formatBullet = document.getElementById("format-bullet")
+        const formatNumber = document.getElementById("format-number")
+        const formatHeart = document.getElementById("format-heart")
+        const formatStar = document.getElementById("format-star")
+
+        formatBold.addEventListener("click", function () {
+            document.execCommand("bold", false, null)
+            this.classList.toggle("active")
+            journalEntry.focus()
+        })
+
+        formatItalic.addEventListener("click", function () {
+            document.execCommand("italic", false, null)
+            this.classList.toggle("active")
+            journalEntry.focus()
+        })
+
+        formatUnderline.addEventListener("click", function () {
+            document.execCommand("underline", false, null)
+            this.classList.toggle("active")
+            journalEntry.focus()
+        })
+
+        formatBullet.addEventListener("click", () => {
+            document.execCommand("insertUnorderedList", false, null)
+            journalEntry.focus()
+        })
+
+        formatNumber.addEventListener("click", () => {
+            document.execCommand("insertOrderedList", false, null)
+            journalEntry.focus()
+        })
+
+        formatHeart.addEventListener("click", () => {
+            insertCustomBullet("❤ ")
+            journalEntry.focus()
+        })
+
+        formatStar.addEventListener("click", () => {
+            insertCustomBullet("★ ")
+            journalEntry.focus()
+        })
+
+        function insertCustomBullet(bullet) {
+            const selection = window.getSelection()
+            const range = selection.getRangeAt(0)
+
+            // Create a new line with the bullet
+            const bulletSpan = document.createElement("div")
+            bulletSpan.innerHTML = bullet
+
+            range.insertNode(bulletSpan)
+
+            // Move cursor to the end
+            range.setStartAfter(bulletSpan)
+            range.setEndAfter(bulletSpan)
+            selection.removeAllRanges()
+            selection.addRange(range)
+        }
+
+        // Stickers
+        const stickerBtns = document.querySelectorAll(".sticker-btn")
+        const stickerContainer = document.querySelector(".sticker-container")
+
+        stickerBtns.forEach((btn) => {
+            btn.addEventListener("click", function () {
+                const sticker = this.getAttribute("data-sticker")
+                addSticker(sticker)
+            })
+        })
+
+        function addSticker(emoji) {
+            const sticker = document.createElement("div")
+            sticker.className = "sticker"
+            sticker.textContent = emoji
+
+            // Random position within the journal page
+            const journalPage = document.querySelector(".journal-page")
+            const pageRect = journalPage.getBoundingClientRect()
+
+            const maxX = pageRect.width - 40
+            const maxY = pageRect.height - 40
+
+            const randomX = Math.floor(Math.random() * maxX)
+            const randomY = Math.floor(Math.random() * maxY)
+
+            sticker.style.left = `${randomX}px`
+            sticker.style.top = `${randomY}px`
+
+            // Random rotation
+            const randomRotation = Math.floor(Math.random() * 40) - 20
+            sticker.style.transform = `rotate(${randomRotation}deg)`
+
+            journalPage.appendChild(sticker)
+        }
+
+        // Page Style
+        const pageStyleRadios = document.querySelectorAll('input[name="page-style"]')
+        const journalPage = document.querySelector(".journal-page")
+
+        pageStyleRadios.forEach((radio) => {
+            radio.addEventListener("change", function () {
+                journalPage.className = "journal-page"
+                journalPage.classList.add(this.value)
+            })
+        })
+
+        // Mood Tracker
+        const moodBtns = document.querySelectorAll(".mood-btn")
+        let selectedMood = ""
+
+        moodBtns.forEach((btn) => {
+            btn.addEventListener("click", function () {
+                moodBtns.forEach((b) => b.classList.remove("selected"))
+                this.classList.add("selected")
+                selectedMood = this.getAttribute("data-mood")
+            })
+        })
+
+        // Save Entry
+        const saveButton = document.getElementById("save-button")
+        const saveConfirmation = document.querySelector(".save-confirmation")
+
+        saveButton.addEventListener("click", () => {
+            const entryDate = document.getElementById("entry-date").value
+            const entryContent = journalEntry.innerHTML
+
+            if (entryContent.trim() === "") {
+                alert("Please write something in your journal before saving.")
+                return
+            }
+
+            // Save to localStorage
+            const entries = JSON.parse(localStorage.getItem("journalEntries") || "{}")
+            entries[entryDate] = {
+                content: entryContent,
+                theme: document.body.className,
+                fontFamily: journalEntry.style.fontFamily,
+                fontSize: journalEntry.style.fontSize,
+                pageStyle: journalPage.classList[1],
+                mood: selectedMood,
+                timestamp: new Date().getTime(),
+            }
+
+            localStorage.setItem("journalEntries", JSON.stringify(entries))
+
+            // Show confirmation
+            saveConfirmation.classList.add("show")
+
+            // Hide confirmation after 2 seconds
+            setTimeout(() => {
+                saveConfirmation.classList.remove("show")
+            }, 2000)
+        })
+
+        // Load Entry if exists for current date
+        function loadEntry() {
+            const entryDate = document.getElementById("entry-date").value
+            const entries = JSON.parse(localStorage.getItem("journalEntries") || "{}")
+
+            if (entries[entryDate]) {
+                const entry = entries[entryDate]
+                journalEntry.innerHTML = entry.content
+
+                // Apply saved styles
+                if (entry.theme) {
+                    document.body.className = ""
+                    document.body.classList.add(entry.theme)
+
+                    // Update radio button
+                    const themeValue = entry.theme.replace("theme-", "")
+                    document.querySelector(`input[name="theme"][value="${themeValue}"]`).checked = true
+                }
+
+                if (entry.fontFamily) {
+                    journalEntry.style.fontFamily = entry.fontFamily
+
+                    // Update select
+                    for (let i = 0; i < fontStyleSelect.options.length; i++) {
+                        if (fontStyleSelect.options[i].value === entry.fontFamily) {
+                            fontStyleSelect.selectedIndex = i
+                            break
+                        }
+                    }
+                }
+
+                if (entry.fontSize) {
+                    journalEntry.style.fontSize = entry.fontSize
+
+                    // Update slider
+                    fontSizeSlider.value = Number.parseInt(entry.fontSize)
+                }
+
+                if (entry.pageStyle) {
+                    journalPage.className = "journal-page"
+                    journalPage.classList.add(entry.pageStyle)
+
+                    // Update radio button
+                    document.querySelector(`input[name="page-style"][value="${entry.pageStyle}"]`).checked = true
+                }
+
+                if (entry.mood) {
+                    // Update mood selection
+                    moodBtns.forEach((btn) => {
+                        if (btn.getAttribute("data-mood") === entry.mood) {
+                            btn.classList.add("selected")
+                            selectedMood = entry.mood
+                        }
+                    })
+                }
+            } else {
+                // Clear the textarea for a new entry
+                journalEntry.innerHTML = ""
+
+                // Reset to default styles
+                journalEntry.style.fontFamily = ""
+                journalEntry.style.fontSize = ""
+                fontSizeSlider.value = 18
+
+                // Reset mood selection
+                moodBtns.forEach((btn) => btn.classList.remove("selected"))
+                selectedMood = ""
+            }
+        }
+
+        // Load entry when date changes
+        document.getElementById("entry-date").addEventListener("change", loadEntry)
+
+        // Entries Modal
+        const viewEntriesBtn = document.getElementById("view-entries-btn")
+        const entriesModal = document.getElementById("entries-modal")
+        const closeModalBtn = document.querySelector(".close-modal")
+        const entriesContainer = document.querySelector(".entries-container")
+
+        viewEntriesBtn.addEventListener("click", () => {
+            populateEntriesModal()
+            entriesModal.classList.add("show")
+        })
+
+        closeModalBtn.addEventListener("click", () => {
+            entriesModal.classList.remove("show")
+        })
+
+        // Close modal when clicking outside
+        entriesModal.addEventListener("click", (e) => {
+            if (e.target === entriesModal) {
+                entriesModal.classList.remove("show")
+            }
+        })
+
+        function populateEntriesModal() {
+            entriesContainer.innerHTML = ""
+            const entries = JSON.parse(localStorage.getItem("journalEntries") || "{}")
+
+            // Sort entries by date (newest first)
+            const sortedEntries = Object.keys(entries).sort().reverse()
+
+            if (sortedEntries.length === 0) {
+                entriesContainer.innerHTML = '<p class="no-entries">No journal entries yet. Start writing today!</p>'
+                return
+            }
+
+            // Decorative elements for thumbnails
+            const decorations = ["❤️", "✨", "🌸", "🦋", "🌈", "🌙", "☁️", "🍓", "🌿", "🍰", "🎀", "🌷"]
+
+            sortedEntries.forEach((date) => {
+                const entry = entries[date]
+                const formattedDate = formatDate(date)
+
+                // Create a preview of the content (strip HTML tags for preview)
+                const tempDiv = document.createElement("div")
+                tempDiv.innerHTML = entry.content
+                const textPreview = tempDiv.textContent || tempDiv.innerText || ""
+                const preview = textPreview.substring(0, 100) + (textPreview.length > 100 ? "..." : "")
+
+                // Get random decorations
+                const randomDecorations = []
+                for (let i = 0; i < 3; i++) {
+                    const randomIndex = Math.floor(Math.random() * decorations.length)
+                    randomDecorations.push(decorations[randomIndex])
+                }
+
+                // Create a unique background color based on the theme
+                const themeClass = entry.theme || "theme-soft-pink"
+
+                const entryCard = document.createElement("div")
+                entryCard.className = "entry-card"
+                entryCard.setAttribute("data-date", date)
+
+                entryCard.innerHTML = `
+            <div class="entry-thumbnail ${themeClass}">
+                ${randomDecorations
+                    .map(
+                        (deco, index) =>
+                            `<span class="entry-decoration" style="top: ${10 + index * 30}%; left: ${10 + index * 25}%;">${deco}</span>`,
+                    )
+                    .join("")}
+                <div class="entry-date">${formattedDate}</div>
+                <div class="entry-preview">${preview}</div>
+                ${entry.mood ? `<div class="entry-mood">${getMoodEmoji(entry.mood)}</div>` : ""}
+                <div class="entry-actions">
+                    <button class="delete-entry-btn" title="Delete entry">✕</button>
+                </div>
+            </div>
+        `
+
+                // Add click handler to load the entry
+                entryCard.querySelector('.entry-thumbnail').addEventListener("click", function() {
+                    const date = entryCard.getAttribute("data-date")
+                    document.getElementById("entry-date").value = date
+                    loadEntry()
+                    entriesModal.classList.remove("show")
+                })
+
+                // Add click handler to delete button
+                entryCard.querySelector('.delete-entry-btn').addEventListener("click", function(e) {
+                    e.stopPropagation() // Prevent triggering the thumbnail click
+                    if (confirm("Are you sure you want to delete this entry?")) {
+                        deleteEntry(date)
+                    }
+                })
+
+                entriesContainer.appendChild(entryCard)
+            })
+        }
+
+// Add this new function to handle deletion
+        function deleteEntry(date) {
+            const entries = JSON.parse(localStorage.getItem("journalEntries") || "{}")
+            delete entries[date]
+            localStorage.setItem("journalEntries", JSON.stringify(entries))
+
+            // If we're currently viewing the deleted entry, clear the editor
+            const currentDate = document.getElementById("entry-date").value
+            if (currentDate === date) {
+                document.getElementById("journal-entry").innerHTML = ""
+            }
+
+            // Refresh the modal
+            populateEntriesModal()
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString)
+            const options = { weekday: "short", month: "short", day: "numeric", year: "numeric" }
+            return date.toLocaleDateString("en-US", options)
+        }
+
+        function getMoodEmoji(mood) {
+            const moodEmojis = {
+                happy: "😊",
+                sad: "😢",
+                excited: "🤩",
+                tired: "😴",
+                loved: "🥰",
+            }
+            return moodEmojis[mood] || ""
+        }
+
+        // Add decorative elements
+        function addRandomDoodles() {
+            const doodles = ["❤️", "✨", "🌸", "🌿", "🦋", "🌙", "☁️", "🌈", "🎀", "🍓", "🍰"]
+
+            const journalPage = document.querySelector(".journal-page")
+
+            // Add 5 random doodles
+            for (let i = 0; i < 5; i++) {
+                const doodle = document.createElement("span")
+                doodle.textContent = doodles[Math.floor(Math.random() * doodles.length)]
+                doodle.style.position = "absolute"
+                doodle.style.fontSize = "16px"
+                doodle.style.opacity = "0.3"
+                doodle.style.pointerEvents = "none"
+
+                // Random position
+                doodle.style.top = `${Math.random() * 100}%`
+                doodle.style.left = `${Math.random() * 100}%`
+
+                // Random rotation
+                doodle.style.transform = `rotate(${Math.random() * 360}deg)`
+
+                journalPage.appendChild(doodle)
+            }
+        }
+
+        addRandomDoodles()
+
+        // Initialize with default font
+        journalEntry.style.fontFamily = fontStyleSelect.value
+        journalEntry.style.fontSize = `${fontSizeSlider.value}px`
+
+        // Load entry for today if exists
+        loadEntry()
+    })
+    // Modify the deleteEntry function to include an animation:
+    function deleteEntry(date) {
+        const entries = JSON.parse(localStorage.getItem("journalEntries") || "{}")
+        const entryCard = document.querySelector(`.entry-card[data-date="${date}"]`)
+
+        // Add fade out animation
+        entryCard.style.transition = "all 0.3s ease"
+        entryCard.style.opacity = "0"
+        entryCard.style.transform = "scale(0.8)"
+
+        setTimeout(() => {
+            delete entries[date]
+            localStorage.setItem("journalEntries", JSON.stringify(entries))
+
+            // If we're currently viewing the deleted entry, clear the editor
+            const currentDate = document.getElementById("entry-date").value
+            if (currentDate === date) {
+                document.getElementById("journal-entry").innerHTML = ""
+            }
+
+            // Refresh the modal
+            populateEntriesModal()
+        }, 300)
+    }
+</script>
+</body>
+</html>
+
